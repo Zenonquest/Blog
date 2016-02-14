@@ -1,5 +1,6 @@
 import datetime
 import pymongo
+from bson.objectid import ObjectId
 
 
 class blogPost(object):
@@ -12,12 +13,12 @@ class blogPost(object):
 		time = str(datetime.datetime.now())
 		new_post = {'title':title, 'time': time, 'text': text}
 		self.myblogs.insert_one(new_post)
-		return str(new_post)
+		return new_post
 
 	#return all blog posts in array
 	def viewAll(self):
 		all_posts = []
-		for each_post in self.myblogs.find():
+		for each_post in self.myblogs.find().sort('time',-1):
 			all_posts.append(
 				{'_id':each_post['_id'],
 				'title':each_post['title'].encode('utf-8'),
@@ -35,8 +36,8 @@ class blogPost(object):
 	def edit(self, blogId, title, text):
 		# setattr(edit_post, 'title', title)
 		# setattr(edit_post, 'text', text)
-		self.myblogs.update_one({'_id': blogId}, {'$set': {'title': title}})
-		return str(self.myblogs.find_one({'_id':blogId}))
+		self.myblogs.update_one({'_id': ObjectId(blogId)}, {'$set': {'title': title}})
+		return str(self.myblogs.find_one({'_id':ObjectId(blogId)}))
 
 	#delete chosen blog post 
 	def deleteOne(self, blogId):

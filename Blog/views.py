@@ -42,7 +42,7 @@ def create_blogpost():
 	text = request.form['text']
 	title = request.form['title']
 	new_post = blogposts.create(title = title, text = text)
-	return new_post
+	return str(new_post)
 
 #updates existing blogpost and returns updated post
 #needs text and title input
@@ -58,7 +58,7 @@ def edit_blogpost(blogId):
 	return edited_post
 
 #deletes all posts in blog
-@app.route('/blog/delete', methods = ['DELETE'])
+@app.route('/blog', methods = ['DELETE'])
 def deleteAll_blogposts():
 	blogposts.deleteAll()
 
