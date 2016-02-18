@@ -13,24 +13,33 @@ class blogPost(object):
 		time = str(datetime.datetime.now())
 		new_post = {'title':title, 'time': time, 'text': text}
 		self.myblogs.insert_one(new_post)
-		return new_post
+		fix_post = self.myblogs.find_one(new_post);
+		fixed_post = {'_id':str(fix_post['_id']),
+		'title':fix_post['title'],
+		'text':fix_post['text'],
+		'time':fix_post['time']}
+		return fixed_post
 
 	#return all blog posts in array
 	def viewAll(self):
 		all_posts = []
 		for each_post in self.myblogs.find().sort('time',-1):
 			all_posts.append(
-				{'_id':each_post['_id'],
+				{'_id':str(each_post['_id']),
 				'title':each_post['title'].encode('utf-8'),
 				'text':each_post['text'].encode('utf-8'),
 				'time':each_post['time'].encode('utf-8')}
 				)
-		return str(all_posts)
+		return (all_posts)
 
 	#return chosen blog post
 	def viewOne(self, blogId):
-		one_post = self.myblogs.find_one({'_id':blogId})
-		return str(one_post)
+		fix_post = self.myblogs.find_one({'_id':ObjectId(blogId)})
+		fixed_post = {'_id':str(fix_post['_id']),
+		'title':fix_post['title'],
+		'text':fix_post['text'],
+		'time':fix_post['time']}
+		return fixed_post
 
 	#edit chosen blog post and returns updated blog
 	def edit(self, blogId, title, text):
