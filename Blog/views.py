@@ -25,8 +25,9 @@ def view_blogposts():
 #delete all blog posts
 @app.route('/api/blog/<blogId>', methods = ['GET'])
 def one_blogpost(blogId):
-	blog = blogposts.viewOne(blogId)
-	return jsonify(blog)
+	blog = jsonify(blogposts.viewOne(blogId))
+	blog.headers['Access-Control-Allow-Origin']='*'
+	return blog
 
 #returns a newly created blogpost
 # needs text and title input
