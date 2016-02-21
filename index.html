@@ -1,14 +1,66 @@
 <link href="css/styles.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<!-- <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script> -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!--from codecademy-->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<!--from codecademy-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400;300' rel='stylesheet' type='text/css'>
+<!--Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
 
-<h1>This is the html page </h1>
 
-<div>
-<input type = "text" name = "objectId" id = "objectId" placehold = "Object ID...">
-<a href = "#" id = "oidsubmitbtn">Pull Blog Entry</a>
-<div id="blogdata" class="clearfix"></div>
+<!--menu is from codecademy-->
+<div class="menu">
+      
+      <!-- Menu icon -->
+      <div class="icon-close">
+        <img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/uber/close.png">
+      </div>
+
+      <!-- Menu -->
+      <ul>
+      	<li><a href=''>Home</a></li>
+        <li><a href=''>Tab 1</a></li>
+        <li><a href=''>Tab 2</a></li>
+        <li><a href=''>Tab 3</a></li>
+      </ul>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <!--icon-menu from codecademy-->
+		<div class="icon-menu">
+	        <i class="fa fa-bars"></i>
+	        Zenon Q. Anderson
+	    </div>
+
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href=''>Active</a></li>
+        <li><a href="">Link 1</a></li> 
+        <li><a href="">Link 2</a></li> 
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+	<div class="jumbotron" id="jumboBlog">
+		<h1>Front Page</h1>
+			<input type = "text" name = "objectId" id = "objectId" placehold = "Object ID...">
+			<p>Test ObjectId: 56c41dac7b3519214894221e</p>
+			<a href = "#" id = "viewonebtn" class="btn btn-primary active" role="button">Pull Blog Entry</a>
+			<a href = "#" id = "viewallbtn" class="btn btn-primary" role="button">Pull All Blogs</a>
+			<div id="blogdata" class="clearfix">
+			</div>
+	</div>
 </div>
 <script src="js/jquery-2.2.0.min.js"></script>
 <!-- <script src="jquery.min.js"></script> -->
 <script src="js/app.js"></script>
+<!-- Bootstrap-->
+<script src="js/bootstrap.min.js"></script>
+<!-- From Codecademy-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

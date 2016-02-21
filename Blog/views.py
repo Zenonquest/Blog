@@ -17,8 +17,10 @@ blogposts = blogPost(db)
 #return all blogs as strings
 @app.route('/api/blog', methods = ['GET'])
 def view_blogposts():
-	blog_list = blogposts.viewAll()
-	return jsonify(blog_list)
+	# blog_list = blogposts.viewAll()
+	blog_list = jsonify(array=blogposts.viewAll())
+	blog_list.headers['Access-Control-Allow-Origin']='*'
+	return blog_list 
 
 #get array of blogs(string)
 #edit old blog post

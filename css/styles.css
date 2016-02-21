@@ -228,3 +228,375 @@ a:hover {
  
 html[xmlns] .clearfix { display: block; }
 * html .clearfix { height: 1%; }
+
+li a {
+  color:black;
+  font-size: 20px;
+}
+
+
+
+/*Edited body from Codecademy*/
+body{
+  background-color:#202024;
+  /*background:  url('images/woodbg.gif') no-repeat center center fixed;*/
+  -webkit-background-size: cover; /* For WebKit*/
+  -moz-background-size: cover;    /* Mozilla*/
+  -o-background-size: cover;      /* Opera*/
+  background-size: cover;         /* Generic*/
+  left: 0;
+  margin: 0;
+  overflow: auto;
+  position: relative;
+  color: white;
+
+}
+
+h1{
+  margin: 0px;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+
+.container1{
+   padding: 10px;
+   position: relative;
+   bottom: 0;
+   left:auto;
+   right:auto ;
+   text-align: justify;
+   font-family: 'Yanone Kaffeesatz', sans-serif;
+   background-color: black;
+   border-radius: 5px;
+   margin-left:20px;
+  margin-right:20px;
+}
+
+
+.container1 li{
+  color:white;
+}
+
+.whitecontainer{
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+  bottom: 0;
+  left:auto;
+  right:auto ;
+  text-align: justify;
+  font-family: 'Roboto', sans-serif;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.singlesite{
+  padding:10px;
+}
+.img-circle{
+  display: block;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+/*Edited Jumbotron from Codecademy*/
+.jumbotron {
+  background-color:black;
+  color:white;
+  -webkit-background-size: cover;
+   -moz-background-size: cover;
+     -o-background-size: cover;
+        background-size: cover;
+  position: relative;
+
+
+}
+
+.jumbotron h1{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  position: relative;
+}
+
+.jumbotron p{
+   padding-top: 0px;
+   font-size: 16px;
+}
+
+
+/*--From Codecademy--*/
+/* Initial menu */
+.menu {
+  background: #202024 url('http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/uber/black-thread.png') repeat left top;
+  left: -285px;  /* start off behind the scenes */
+  height: 100%;
+  position: fixed;
+  width: 285px;
+}
+
+.menu ul {
+  border-top: 1px solid #636366;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  border-bottom: 1px solid #636366;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 45px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 3px;
+}
+
+.menu a {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.icon-close {
+  cursor: pointer;
+  padding-left: 10px;
+  padding-top: 50px;
+}
+
+.icon-menu {
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  padding-top: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.icon-menu i {
+  margin-right: 5px;
+}
+
+.row{
+  padding-left:10px;
+  padding-right:10px;
+  color:white;
+  font-size: 22px;
+}
+
+.row p{
+  font-family: 'Roboto', sans-serif;
+}
+
+.col-xs-4{
+  padding-top:10px;
+}
+
+.col-sm-4{
+  padding-top:10px;
+}
+
+.banner{
+
+}
+
+
+.jumbotron-first{
+  background-color: black;
+  /*background-image: url('images/americanspatter.jpg'); */
+  height:800px;
+  background-size:100%;
+  margin-top:-15px;
+}
+
+.jumbotron-second{
+  background-color:black;
+  padding-left: 10px;
+  padding-top:40px;
+  position: relative;
+
+}
+
+.jumbotron-head{
+  height:140px;
+}
+
+.pubdate{
+  color:white;
+  font-size: 12px;
+
+}
+
+.sitecontainer{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  color:white;
+  font-size: 26px;
+  padding-left: 0px;
+}
+
+.sitecontainer ul{
+  color:white;
+  padding-left: 20px;
+}
+
+.sitecontainer a{
+  color:white;
+}
+
+.site-content-container{
+  color:black;
+  padding: 20px;
+}
+
+.icon-menu{
+  font-family: 'Yanone Kaffeesatz',sans-serif;
+  font-size: 30px;
+  line-height: 1.5;
+  padding-left:16px;
+  padding-right:16px;
+  padding-bottom:0px;
+  margin-left:-20px;
+  margin-top:-5px;
+}
+
+form {
+    /* Just to center the form on the page */
+    /*margin: 0 auto;*/
+    width: 300px;
+    /* To see the outline of the form */
+    padding: 20px;
+    margin-left: 40px;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    font-family: 'Roboto', sans-serif;
+}
+
+form div + div {
+    margin-top: 1em;
+}
+
+
+label {
+    /* To make sure that all labels have the same size and are properly aligned */
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+}
+
+input, textarea {
+    /* To make sure that all text fields have the same font settings
+       By default, textareas have a monospace font */
+    font: 1em sans-serif;
+    font-family: 'Roboto', sans-serif;
+
+    /* To give the same size to all text field */
+    width: 150px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    /* To harmonize the look & feel of text field border */
+    border: 1px solid #999;
+}
+
+input:focus, textarea:focus {
+    /* To give a little highlight on active elements */
+    border-color: #000;
+}
+
+input{
+    color: green;
+    margin-left:10px;
+    margin-top: 10px;
+}
+
+.rdio input{
+  width:40px;
+  padding-left: 0px;
+  margin-top: 0px;
+
+}
+
+.whitecontainer form{
+  margin: auto;
+  width: 500px;
+}
+
+textarea {
+    /* To properly align multiline text fields with their labels */
+    vertical-align: top;
+
+    /* To give enough room to type some text */
+    height: 5em;
+
+    /* To allow users to resize any textarea vertically
+       It does not work on every browsers */
+    resize: vertical;
+}
+
+.whitecontainer textarea,input{
+  width: 200px;
+  margin: auto;
+  color: black;
+}
+
+.whitecontainer label{
+  width:100px;
+  color: black;
+}
+
+.button {
+    /* To position the buttons to the same position of the text fields */
+    padding-left: 90px; /* same size as the label elements */
+}
+button {
+    /* This extra margin represent roughly the same space as the space
+       between the labels and their text fields */
+    margin-left: .5em;
+
+}
+
+.whitecontainer .button{
+  padding-left: 10px;
+}
+
+#blogdata {
+  display: block;
+  padding: 25px 0;
+}
+
+#jumboBlog {
+  /*font-family:'Roboto';*/
+  font-family: 'Open Sans', sans-serif;
+}
+
+#jumboBlog h1{
+  /*font-family:'Roboto';*/
+  font-family: 'Roboto', serif;
+}
+
+#singleblog {
+  padding: 10px;
+  padding-left: 5px;
+}
+
+#editbox {
+  padding: 0px;
+}
+
+#editbox form {
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 20px;
+}
+
+#editbox textarea {
+  height: 100px;
+}
+
+.counter {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
