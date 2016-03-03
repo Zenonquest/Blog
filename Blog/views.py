@@ -36,9 +36,12 @@ def one_blogpost(blogId):
 @app.route('/api/blog', methods = ['POST'])
 def create_blogpost():
 	text = request.form['text']
-	title = request.form['title']
-	new_post = blogposts.create(title = title, text = text)
-	return jsonify(new_post)
+	# title = request.form['title']
+	# blogposts.create(title = title, text = text)
+	text = request.get_json()['text']
+	title = request.get_json()['title']
+	# new_post = blogposts.create(title = title, text = text)
+	# return jsonify(new_post)
 
 #updates existing blogpost and returns updated post
 #needs text and title input
@@ -58,3 +61,4 @@ def deleteAll_blogposts():
 @app.route('/api/blog/<blogId>', methods = ['DELETE'])
 def delete_blogpost(blogId):
 	blogposts.deleteOne(blogId)
+

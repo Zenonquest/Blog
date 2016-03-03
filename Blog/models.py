@@ -13,12 +13,12 @@ class blogPost(object):
 		time = str(datetime.datetime.now())
 		new_post = {'title':title, 'time': time, 'text': text}
 		self.myblogs.insert_one(new_post)
-		fix_post = self.myblogs.find_one(new_post);
-		fixed_post = {'_id':str(fix_post['_id']),
-		'title':fix_post['title'],
-		'text':fix_post['text'],
-		'time':fix_post['time']}
-		return fixed_post
+		# fix_post = self.myblogs.find_one(new_post);
+		# fixed_post = {'_id':str(fix_post['_id']),
+		# 'title':fix_post['title'],
+		# 'text':fix_post['text'],
+		# 'time':fix_post['time']}
+		# return fixed_post
 
 	#return all blog posts in array
 	def viewAll(self):
