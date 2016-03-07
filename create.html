@@ -1,5 +1,3 @@
-<link href="css/styles.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
 <!--from codecademy-->
 <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
 <!--from codecademy-->
@@ -7,6 +5,8 @@
 <!--Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
 
 
 <!--menu is from codecademy-->
@@ -48,17 +48,17 @@
 
 <div class="container">
 	<div class="jumbotron" id="jumboBlog">
-		<h1>Create Page</h1>
+		<h2>Create Page</h2>
     <div class="container" id=createbox> 
       <form id="form-create">
-        <div id="title-group" class="form-group">
+        <div id="create-title-group" class="form-group">
           <label for="title">Title</label>
-          <textarea class="form-control" id="create-title-box" name="title" placeholder="Your title here"></textarea>
+          <textarea class="form-control" id="create-title-area" name="title" placeholder="Your title here"></textarea>
         </div>
-        <div id="text-group" class="form-group"><textarea class="form-control status-box" id="create-text-box" name="text" rows="20" placeholder="New Blog Text..."></textarea></div>
+        <div id="create-text-group" class="form-group"><textarea class="form-control status-box" id="create-text-area" name="text" rows="20" placeholder="New Blog Text..."></textarea></div>
       </form>
       </div>
-      <a href = "" id="btn-create" class="btn btn-primary" role="button">Submit This Entry</a><p class="counter" id="counter-create">0</p>
+      <a href = "#" id="btn-create" class="btn btn-primary" role="button">Submit This Entry</a><p class="counter" id="counter-create">0</p>
 			<div id="blogdata" class="clearfix">
 			</div>
 	</div>

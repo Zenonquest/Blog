@@ -301,8 +301,8 @@ h1{
 
 /*Edited Jumbotron from Codecademy*/
 .jumbotron {
-  background-color:black;
-  color:white;
+  background-color:white;
+  color:black;
   -webkit-background-size: cover;
    -moz-background-size: cover;
      -o-background-size: cover;
@@ -365,10 +365,14 @@ h1{
 .icon-menu {
   color: #fff;
   cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  padding-bottom: 25px;
-  padding-left: 25px;
+  font-family: 'Yanone Kaffeesatz',sans-serif;
+  font-size: 30px;
+  line-height: 1.5;
+  padding-left:16px;
+  padding-right:16px;
+  padding-bottom:0px;
+  margin-left:-20px;
+  margin-top:-3px;
   padding-top: 5px;
   text-decoration: none;
   text-transform: uppercase;
@@ -396,11 +400,6 @@ h1{
 .col-sm-4{
   padding-top:10px;
 }
-
-.banner{
-
-}
-
 
 .jumbotron-first{
   background-color: black;
@@ -457,7 +456,7 @@ h1{
   padding-right:16px;
   padding-bottom:0px;
   margin-left:-20px;
-  margin-top:-5px;
+  margin-top:-3px;
 }
 
 form {
@@ -607,6 +606,11 @@ button {
   margin-top: 20px;
 }
 
+#counter-edit {
+  padding-left: 50px;
+  margin-bottom: 0px;
+}
+
 #btn-create {
   margin-left: 15px;
   margin-right: 20px;
@@ -628,5 +632,69 @@ button {
   padding-bottom: 0px;
   margin-right: 10px;
   margin-left: 0px;
-  width: 50%;
+  width: auto;
 }
+
+#buttons-blog-detail {
+  padding-left: 0px;
+}
+
+#single-blog-detail {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  margin: 0px;
+}
+
+#btns-box {
+  display: inline-block;
+  padding-left: 0px;
+}
+
+#btns-box .btn{
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+  width: auto;
+}
+
+#btns-box-final {
+  display: inline-block;
+  padding-left: 0px;
+}
+
+#btns-box-final .btn{
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+  width: auto;
+}
+
+#all-blog-titles p{
+  font-size: 24px;
+}
+.singleblog {
+  padding-left: 0px;
+}
+.singleblog li{
+  font-size: 20px;
+}
+
+.singleblog h2{
+  font-size: 24px;
+}
+
+.singleblog p{
+  font-size: 20px;
+}
+
+#single-blog-detail h2{
+  font-size: 24px;
+}
+
+#edit-box {
+  padding-left:0px;
+  padding-bottom: 10px;
+  margin-left:0px;
+  width: 90%;
+}
+

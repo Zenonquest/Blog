@@ -59,52 +59,52 @@ var main = function(){
 		});
 	});
 
-	$('#editbtn').on('click', function(e){
-		e.preventDefault();
-		$('#detail-info').html(
-			'<div id="loader"><img src="css/loader.gif" alt="loading..."></div>');
+	// $('#editbtn').on('click', function(e){
+	// 	e.preventDefault();
+	// 	$('#detail-info').html(
+	// 		'<div id="loader"><img src="css/loader.gif" alt="loading..."></div>');
 
-		// Read a page's GET URL variables and return them as an associative array.
-		function getUrlVars()
-		{
-	    	var vars = [], hash;
-		    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-		    for(var i = 0; i < hashes.length; i++)
-		    {
-		        hash = hashes[i].split('=');
-		        vars.push(hash[0]);
-		        vars[hash[0]] = hash[1];
-		    }
-	    return vars;
-		}
+	// 	// Read a page's GET URL variables and return them as an associative array.
+	// 	function getUrlVars()
+	// 	{
+	//     	var vars = [], hash;
+	// 	    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	// 	    for(var i = 0; i < hashes.length; i++)
+	// 	    {
+	// 	        hash = hashes[i].split('=');
+	// 	        vars.push(hash[0]);
+	// 	        vars[hash[0]] = hash[1];
+	// 	    }
+	//     return vars;
+	// 	}
 
-		var bid = getUrlVars()["bid"]
-		var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid;
-		// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+	// 	var bid = getUrlVars()["bid"]
+	// 	var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid;
+	// 	// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 
-		requestJSON(blogentry, function(json) {
-			if(json.message == "Not Found" || bid == "") {
-				$('#blogdata').html("<h2>No Blog Id Found</h2>");
-			}
-			else {
-				var title = json.title;
-				var text = json.text;
-				var time = json.time;
-				var bid = json._id;
+	// 	requestJSON(blogentry, function(json) {
+	// 		if(json.message == "Not Found" || bid == "") {
+	// 			$('#blogdata').html("<h2>No Blog Id Found</h2>");
+	// 		}
+	// 		else {
+	// 			var title = json.title;
+	// 			var text = json.text;
+	// 			var time = json.time;
+	// 			var bid = json._id;
 
-				var outhtml = '<h2>'+ 'Title: ' + title+'</h2>';
-				outhtml = outhtml + '<div class="bcontent">'+ 'Time: ' + time+'</div>';
-				outhtml = outhtml + '<p>'+ 'Body : ' + text+'</p>';
-				outhtml = outhtml + '<div class="container" id=editbox><form><div class="form-group"><textarea class="form-control status-box" id="edit-box" rows="2" placeholder="New Blog Text?"></textarea></div></form></div>';
-				outhtml = outhtml + '<a href = "#" id = "editbtn" class="btn btn-primary" role="button">Edit This Entry</a><p class="counter">140</p>';
-				outputPageContent();
+	// 			var outhtml = '<h2>'+ 'Title: ' + title+'</h2>';
+	// 			outhtml = outhtml + '<div class="bcontent">'+ 'Time: ' + time+'</div>';
+	// 			outhtml = outhtml + '<p>'+ 'Body : ' + text+'</p>';
+	// 			outhtml = outhtml + '<div class="container" id=editbox><form><div class="form-group"><textarea class="form-control status-box" id="edit-box" rows="2" placeholder="New Blog Text?"></textarea></div></form></div>';
+	// 			outhtml = outhtml + '<a href = "#" id = "editbtn" class="btn btn-primary" role="button">Edit This Entry</a><p class="counter">140</p>';
+	// 			outputPageContent();
 
-				function outputPageContent() {
-					$('#blogdata').html(outhtml);
-				}
-			}
-		});
-	});
+	// 			function outputPageContent() {
+	// 				$('#blogdata').html(outhtml);
+	// 			}
+	// 		}
+	// 	});
+	// });
 
 
 /*	$('#viewallbtn').on('click', function(e){
@@ -149,36 +149,35 @@ var main = function(){
 	});*/
 
 	//submit create form
-	$('#btn-create').on('click', function(e) {
+	$('#btn-create').on('click', function(e){
 		e.preventDefault();
+		var blogentry = 'http://127.0.0.1:5000/api/blog';
 
 		//get form data
-		var title = $('#create-title-box').val();
-		var text  = $('#create-text-box').val();
+		formData = {
+			'title' : $('#create-title-area').val(),
+			'text'  : $('#create-text-area').val()
+		};
+
+		var blogentry = 'http://127.0.0.1:5000/api/blog';
 
 		$.ajax({
 			type     : 'POST',
-			url      : 'http://127.0.0.1:5000/api/blog',
-			data     : $('form').serialize(),
-			// data     : JSON.stringify($'form'.serialize()),
+			url      : blogentry,
+			data     : JSON.stringify(formData),
 			crossDomain : true,
-			dataType : 'jsonp',
+			dataType : 'json',
+			contentType : 'application/json',
 			success  : function(){
 				location.reload();
 			}
 
 		});
-
-
-		// .done(function(data) {
-
-		// 	console.log(data);
-		// });
-
 		
 	});
 
-	$(document).keypress(function(evvent){
+	//hide/show with n and o
+	$(document).keypress(function(event){
 		if(event.which === 111) {
 			$('#editbox').hide();
 		}
@@ -187,45 +186,29 @@ var main = function(){
 		}
 	});
 
-	$('#edit-box').keyup(function() {
+//Edit text letter counter
+    $('#edit-text-area').keyup(function() {
 	    var postLength = $(this).val().length;
-	    var charactersLeft = 140 - postLength;
-	    $('.counter').text(charactersLeft);
-	  
-	    if(charactersLeft < 0) {
+	    $('#counter-edit').text(postLength);	  
+	    if(postLength < 0) {
 	      $('#editbtn').addClass('disabled'); 
-	    }
-	    else if(charactersLeft == 140) {
-	      $('#editbtn').addClass('disabled');
 	    }
 	    else {
 	      $('#editbtn').removeClass('disabled');
 	    }
     });
 
-    $('#create-text-box').keyup(function() {
+	//Create text letter counter
+    $('#create-text-area').keyup(function() {
 	    var postLength = $(this).val().length;
-	    // var charactersLeft = 140 - postLength;
-	    $('.counter').text(postLength);
-	  
+	    $('#counter-create').text(postLength);	  
 	    if(postLength < 0) {
 	      $('#btn-create').addClass('disabled'); 
 	    }
-	    // else if(postLength == 140) {
-	    //   $('#btn-create').addClass('disabled');
-	    // }
 	    else {
 	      $('#btn-create').removeClass('disabled');
 	    }
     });
-
-    // //Go to details
-    // $('.singleblog').on(click, function(event){
-
-
-    // });
-
-
 
 	function requestJSON(url, callback) {
 	    $.ajax({

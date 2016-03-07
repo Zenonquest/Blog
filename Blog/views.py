@@ -19,7 +19,7 @@ blogposts = blogPost(db)
 def view_blogposts():
 	# blog_list = blogposts.viewAll()
 	blog_list = jsonify(array=blogposts.viewAll())
-	blog_list.headers['Access-Control-Allow-Origin']='*'
+	# blog_list.headers['Access-Control-Allow-Origin']='*'
 	return blog_list 
 
 #get array of blogs(string)
@@ -28,29 +28,30 @@ def view_blogposts():
 @app.route('/api/blog/<blogId>', methods = ['GET'])
 def one_blogpost(blogId):
 	blog = jsonify(blogposts.viewOne(blogId))
-	blog.headers['Access-Control-Allow-Origin']='*'
+	# blog.headers['Access-Control-Allow-Origin']='*'
 	return blog
 
 #returns a newly created blogpost
 # needs text and title input
 @app.route('/api/blog', methods = ['POST'])
 def create_blogpost():
-	text = request.form['text']
-	# title = request.form['title']
-	# blogposts.create(title = title, text = text)
 	text = request.get_json()['text']
 	title = request.get_json()['title']
-	# new_post = blogposts.create(title = title, text = text)
-	# return jsonify(new_post)
+	new_post = blogposts.create(title = title, text = text)
+	# new_post.headers['Access-Control-Allow-Origin']='*'
+	return jsonify({'success': 'true'})
 
 #updates existing blogpost and returns updated post
 #needs text and title input
 @app.route('/api/blog/<blogId>', methods = ['POST'])
 def edit_blogpost(blogId):
-	text = request.form['text']
-	title = request.form['title']
+	# text = request.form['text']
+	# title = request.form['title']
+	text = request.get_json()['text']
+	title = request.get_json()['title']
 	editted_post = blogposts.edit(blogId = blogId, title = title, text = text)
-	return edited_post
+	# editted_post.headers['Access-Control-Allow-Origin']='*'
+	return jsonify({'success': 'true'})
 
 #deletes all posts in blog
 @app.route('/api/blog', methods = ['DELETE'])
@@ -60,5 +61,14 @@ def deleteAll_blogposts():
 #deletes single post in blog
 @app.route('/api/blog/<blogId>', methods = ['DELETE'])
 def delete_blogpost(blogId):
-	blogposts.deleteOne(blogId)
+	deleted_post = blogposts.deleteOne(blogId)
+	return jsonify({'success': 'true'})
 
+
+#handles CORS
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  return response

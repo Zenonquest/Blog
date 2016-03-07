@@ -12,7 +12,7 @@ class blogPost(object):
 	def create(self, title, text):
 		time = str(datetime.datetime.now())
 		new_post = {'title':title, 'time': time, 'text': text}
-		self.myblogs.insert_one(new_post)
+		return self.myblogs.insert_one(new_post)
 		# fix_post = self.myblogs.find_one(new_post);
 		# fixed_post = {'_id':str(fix_post['_id']),
 		# 'title':fix_post['title'],
@@ -43,19 +43,17 @@ class blogPost(object):
 
 	#edit chosen blog post and returns updated blog
 	def edit(self, blogId, title, text):
-		# setattr(edit_post, 'title', title)
-		# setattr(edit_post, 'text', text)
-		self.myblogs.update_one({'_id': ObjectId(blogId)}, {'$set': {'title': title}})
-		return str(self.myblogs.find_one({'_id':ObjectId(blogId)}))
+		self.myblogs.update_one({'_id': ObjectId(blogId)}, {'$set': {'title': title, 'text': text}})
+		return self.myblogs.find_one({'_id':ObjectId(blogId)})
 
 	#delete chosen blog post 
 	def deleteOne(self, blogId):
-		# self.query.filter_by(self.id = blogId).delete()
-		self.myblogs.delete_one({'_id': blogId})
+		##to delete without return
+		# self.myblogs.delete_one({'_id': blogId})
 
 		##to return the deleted post
-		#self.myblogs.find_one_and_delete({'_id', blogId})
-
+		return self.myblogs.find_one_and_delete({'_id': ObjectId(blogId)})
+# 
 	#delete all blogs
 	def deleteAll(self):
 		self.myblogs.delete_many({})
