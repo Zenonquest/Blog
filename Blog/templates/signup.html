@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+ <form action="" method="POST" name="form" id="signup-form">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <p>
+            <label class="control-label" for="username">Username</label>
+            {{ form.username }}
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+            <label class="control-label" for="password">Password</label>
+            {{ form.password }}
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+        <button class="btn btn-default" type="submit">Submit</button>
+    </div>
+</form>
+
+    <p> {{ check }} </p>
+
+{% endblock %}

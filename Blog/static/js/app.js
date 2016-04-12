@@ -19,12 +19,8 @@ var main = function(){
             
         $('body').animate({
             left:'0px'},
-            200);
-        
+            200);      
     });
-
-
-
 
 	$('#viewonebtn').on('click', function(e){
 		e.preventDefault();
@@ -58,6 +54,165 @@ var main = function(){
 			}
 		});
 	});
+
+	//submit create form
+	$('#btn-create').on('click', function(e){
+		e.preventDefault();
+		var blogentry = 'http://127.0.0.1:5000/api/blog';
+
+		//get form data
+		formData = {
+			'title' : $('#create-title-area').val(),
+			'text'  : $('#create-text-area').val()
+		};
+
+		$.ajax({
+			type     : 'POST',
+			url      : blogentry,
+			data     : JSON.stringify(formData),
+			crossDomain : true,
+			dataType : 'json',
+			contentType : 'application/json',
+			success  : function(){
+				location.reload();
+			}
+		});	
+	});
+
+
+	//submit create form
+	$('#btn-newuser').on('click', function(e){
+		e.preventDefault();
+		var newuserURL = 'http://127.0.0.1:5000/api/signup';
+
+		//get form data
+		formData = {
+			'username' : $('#create-username-area').val(),
+			'password'  : $('#create-password-area').val()
+		};
+
+		// var blogentry = 'http://127.0.0.1:5000/api/blog';
+		$.ajax({
+			type     : 'POST',
+			url      : newuserURL,
+			data     : JSON.stringify(formData),
+			crossDomain : true,
+			dataType : 'json',
+			contentType : 'application/json',
+			success  : function(){
+				location.reload();
+			}
+		});	
+	});
+
+	//display login forms 
+	$('#btn-login').on('click', function(e){
+		var outhtml = '<div class="container" id="container-login">';
+		outhtml = outhtml + '<form id="form-login"><div id="login-username-group class="form-group">';
+		outhtml = outhtml + '<label for="username">Username</label>';
+		outhtml = outhtml + '<textarea class="form-control" id="login-username-area" name="username" placeholder="Your username here"></textarea></div>';
+		outhtml = outhtml + '<div id="login-passwrd-group class="form-group">';
+		outhtml = outhtml + '<textarea class="form-control status-box" id="login-password-area" name="password" onKeyPress="handleTyping(event)" rows="1" placeholder="Your password here"></textarea></div>';
+		outhtml = outhtml + '<textarea rows="10" cols="30" id="hidden-login-password-area"  style="display:none"></textarea>';
+		outhtml = outhtml + '<a href = "#" id="btn-login-submit" class="btn btn-primary btn-login" role="button">Login</a><a href = "#" id="btn-login-close" class="btn btn-primary btn-login" role="button">Close</a></div></form>';
+
+		outputPageContent();
+
+		function outputPageContent() {
+			$('#login-user-detail').html(outhtml);
+		}
+
+		
+
+		$('#btn-login-submit').on('click', function(e){
+			e.preventDefault();
+			var loginURL = 'http://127.0.0.1:5000/api/login';
+
+			//get form data 
+			formData = {
+				'username' : $('#login-username-area').val(),
+				'password' : $('#login-password-area').val()
+
+			};
+
+			$.ajax({
+				type     : 'POST',
+				url      : loginURL,
+				data     : JSON.stringify(formData),
+				crossDomain : true,
+				dataType : 'json',
+				contentType : 'application/json',
+				success  : function(){
+					location.reload();
+				}
+			});
+
+			$('#btn-login-close').on('click', function(){
+				$('#login-user-detail').hide();
+			});
+		});
+
+		//typing -> password
+		function handleTyping(e){
+		    setTimeout(function(){handleTypingDelayed(e)},500);
+		}
+
+		function handleTypingDelayed(e){
+
+		    var text = document.getElementById('hidden-login-password-area').value;
+		    var stars = document.getElementById('hidden-login-password-area').value.length;
+		    unicode = eval(unicode);
+		    var unicode=e.keyCode? e.keyCode : e.charCode;
+
+		    if ( (unicode >=65 && unicode <=90) 
+		            || (unicode >=97 && unicode <=122) 
+		                || (unicode >=48 && unicode <=57) ){
+		        text = text+String.fromCharCode(unicode);    
+		        stars += 1;
+		    }else{
+		        stars -= 1;
+		    }
+
+		    document.getElementById('hidden-login-password-area').value = text;
+		    document.getElementById('login-password-area').value = generateStars(stars);
+		}
+
+		function generateStars(n){
+		    var stars = '';
+		    for (var i=0; i<n;i++){
+		        stars += '.';
+		    }
+		    return stars;
+		}
+	});
+
+	//hide/show with n and o
+	$(document).keypress(function(event){
+		if(event.which === 111) {
+			$('#editbox').hide();
+		}
+		else if(event.which === 110) {
+			$('#editbox').show();
+		}
+	});
+
+
+	function requestJSON(url, callback) {
+	    $.ajax({
+	      url: url,
+	      complete: function(xhr) {
+	        callback.call(null, xhr.responseJSON);
+	      }
+	    });
+	}
+};
+
+$(document).ready(main);
+
+
+
+
+//////////////////////////OLD STUFF//////////////////////////////
 
 	// $('#editbtn').on('click', function(e){
 	// 	e.preventDefault();
@@ -147,77 +302,3 @@ var main = function(){
 			}
 		});
 	});*/
-
-	//submit create form
-	$('#btn-create').on('click', function(e){
-		e.preventDefault();
-		var blogentry = 'http://127.0.0.1:5000/api/blog';
-
-		//get form data
-		formData = {
-			'title' : $('#create-title-area').val(),
-			'text'  : $('#create-text-area').val()
-		};
-
-		var blogentry = 'http://127.0.0.1:5000/api/blog';
-
-		$.ajax({
-			type     : 'POST',
-			url      : blogentry,
-			data     : JSON.stringify(formData),
-			crossDomain : true,
-			dataType : 'json',
-			contentType : 'application/json',
-			success  : function(){
-				location.reload();
-			}
-
-		});
-		
-	});
-
-	//hide/show with n and o
-	$(document).keypress(function(event){
-		if(event.which === 111) {
-			$('#editbox').hide();
-		}
-		else if(event.which === 110) {
-			$('#editbox').show();
-		}
-	});
-
-//Edit text letter counter
-    $('#edit-text-area').keyup(function() {
-	    var postLength = $(this).val().length;
-	    $('#counter-edit').text(postLength);	  
-	    if(postLength < 0) {
-	      $('#editbtn').addClass('disabled'); 
-	    }
-	    else {
-	      $('#editbtn').removeClass('disabled');
-	    }
-    });
-
-	//Create text letter counter
-    $('#create-text-area').keyup(function() {
-	    var postLength = $(this).val().length;
-	    $('#counter-create').text(postLength);	  
-	    if(postLength < 0) {
-	      $('#btn-create').addClass('disabled'); 
-	    }
-	    else {
-	      $('#btn-create').removeClass('disabled');
-	    }
-    });
-
-	function requestJSON(url, callback) {
-	    $.ajax({
-	      url: url,
-	      complete: function(xhr) {
-	        callback.call(null, xhr.responseJSON);
-	      }
-	    });
-	}
-};
-
-$(document).ready(main);

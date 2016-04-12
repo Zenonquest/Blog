@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+ <form action="" method="POST" name="form" id="form-create">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      <h1> 
+        {% if current_user %}
+        {{current_user.username}}
+        {% endif %}
+      </h1>
+        <p>
+            <label class="control-label" for="title">Title</label>
+            
+            {{ form.title }}
+            {% for error in form.title.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+            </div>
+            <label id="create-text-area" class="control-label" for="text">Text</label>
+            {{ form.text }}
+            {% for error in form.text.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </p>
+        <button class="btn btn-default" type="submit">Submit</button>
+        </div>
+    </form>
+
+    <p> {{ check }} </p>
+
+{% endblock %}

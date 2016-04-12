@@ -698,3 +698,55 @@ button {
   width: 90%;
 }
 
+#login-user-detail {
+  width: 20%;
+  float: right;
+  background: white;
+  z-index:1000;
+  position: relative;
+  outline: black dotted;
+}
+
+#navbar-signup {
+  float:right;
+}
+
+#form-login {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding:5px;
+  z-index: 1000;
+}
+
+#form-login form{
+  padding-bottom: 0px;
+
+}
+
+.btn-login {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+#login-username-area {
+  margin-top: 10px;
+}
+
+#login-form p{
+  color: black;
+}
+
+#create-form p{
+  color: black;
+}
+
+#create-form input{
+  width: 80%;
+}
+
+
+td{
+  color: black;
+}
+

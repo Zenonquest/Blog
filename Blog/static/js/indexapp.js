@@ -55,8 +55,32 @@ $(document).ready(function(){
 					eoutputPageContent();
 
 					function eoutputPageContent() {
-						$('#edit-blog-detail').html(eouthtml);
-					}
+							$('#edit-blog-detail').html(eouthtml);
+						}
+
+						$('#editbtn').on('click', function(e){
+						e.preventDefault();
+
+						var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[0];
+						// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+						var formData = {
+							'title' : $('#edit-title-area').val(),
+							'text'  : $('#edit-text-area').val()
+						};
+						
+						$.ajax({
+							type     : 'POST',
+							url      : blogentry,
+							data     : JSON.stringify(formData),
+							crossDomain : true,
+							dataType : 'json',
+							contentType : 'application/json',
+							success  : function(){
+								location.reload();
+							}
+						});
+
+					});
 
 					$('#canceleditbtn').on('click', function(){
 						$('#edit-blog-detail').hide();
@@ -65,29 +89,7 @@ $(document).ready(function(){
 
 				});
 
-				$('#editbtn').on('click', function(e){
-					e.preventDefault();
-
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[0];
-					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
-					var formData = {
-						'title' : $('#edit-title-area').val(),
-						'text'  : $('#edit-text-area').val()
-					};
-					
-					$.ajax({
-						type     : 'POST',
-						url      : blogentry,
-						data     : JSON.stringify(formData),
-						crossDomain : true,
-						dataType : 'json',
-						contentType : 'application/json',
-						success  : function(){
-							location.reload();
-						}
-					});
-
-				});
+				
 
 				$('#deletebtn').on('click', function(e){
 					e.preventDefault();

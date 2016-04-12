@@ -38,14 +38,38 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href=''>Home</a></li>
         <li><a href="create.html">Create</a></li> 
-        <li><a href="details.html">Link 2</a></li> 
+        <li><a href="details.html">Link 2</a></li>
+      </ul>
+      <ul class="nav navbar-nav" id="navbar-signup">
+        <li><a id="btn-login">LOGIN</a></li>
+<!--         {% if current_user.is_authenticated() %}
+          <li><a href="{{ url_for('logout') }}"> Logout</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}">Login</a></li> -->
+          <li><a id="btn-signup" href="signup.html">Sign Up</a></li>
+        <!-- {% endif %}  -->
       </ul>
     </div>
   </div>
 </nav>
 
+<div id="login-user-detail" class="clearfix">
+</div>
+<!-- <div class="container"> -->
+  <!-- {% include "flash.html" %} -->
+  <!-- <form id="form-create"> -->
+      <!-- <div id="login-username-group" class="form-group">
+        <label for="username">Title</label>
+        <textarea class="form-control" id="login-username-area" name="username" placeholder="Your username here"></textarea>
+      </div>
+    <div id="login-password-group" class="form-group"><textarea class="form-control status-box" id="login-password-area" name="text" rows="1" placeholder="Your password here"></textarea></div>
+  </form> -->
+  <!-- {% block content %}{% endblock %} -->
+<!-- </div> -->
+<!-- a href = "#" id="btn-login-submit" class="btn btn-primary" role="button">Login</a>
+</div> -->
 
-<div class="container">
+<div class="container" id="main-content">
 	<div class="jumbotron" id="jumboBlog">
 		<h2>Front Page</h2>
 			<!-- <input type = "text" name = "objectId" id = "objectId" placehold = "Object ID...">

@@ -6,7 +6,7 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="/static/css/styles.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
 
 
 <!--menu is from codecademy-->
@@ -38,7 +38,7 @@
     <div>
       <ul class="nav navbar-nav">
         <li><a href="index.html">Home</a></li>
-        <li class="active"><a href="">Create</a></li> 
+        <li class="active"><a href="">Sign Up</a></li> 
         <li><a href="">Link 2</a></li> 
       </ul>
     </div>
@@ -48,17 +48,17 @@
 
 <div class="container">
 	<div class="jumbotron" id="jumboBlog">
-		<h2>Create Page</h2>
+		<h2>Create New User</h2>
     <div class="container" id=createbox> 
       <form id="form-create">
-        <div id="create-title-group" class="form-group">
-          <label for="title">Title</label>
-          <textarea class="form-control" id="create-title-area" name="title" placeholder="Your title here"></textarea>
+        <div id="create-username-group" class="form-group">
+          <label for="username">Username</label>
+          <textarea class="form-control" id="create-username-area" name="username" placeholder="Your username here"></textarea>
         </div>
-        <div id="create-text-group" class="form-group"><textarea class="form-control status-box" id="create-text-area" name="text" rows="20" placeholder="New Blog Text..."></textarea></div>
+        <div id="create-password-group" class="form-group"><textarea class="form-control status-box" id="create-password-area" name="text" rows="1" placeholder="Your password here"></textarea></div>
       </form>
       </div>
-      <a href = "#" id="btn-create" class="btn btn-primary" role="button">Submit This Entry</a><p class="counter" id="counter-create">0</p>
+      <a href = "#" id="btn-newuser" class="btn btn-primary" role="button">Submit This User</a><p class="counter" id="counter-newuser">0</p>
 			<div id="blogdata" class="clearfix">
 			</div>
 	</div>
