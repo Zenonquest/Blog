@@ -1,23 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
+{% set active_page = "signup" %}
 
- <form action="" method="POST" name="form" id="signup-form">
+ <form action="" method="POST" name="signup" id="signup-form" class="form-horizontal">
     {{ form.hidden_tag() }}
-    <div class="form-group">
-        <p>
-            <label class="control-label" for="username">Username</label>
+    <h2>Sign Up</h2>
+    <div class="control-group">
+        <label class="control-label" for="username">Username</label>
+        <div class="controls">
             {{ form.username }}
             {% for error in form.username.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}<br>
-            <label class="control-label" for="password">Password</label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="password">Password</label>
+        <div class="controls">
             {{ form.password }}
             {% for error in form.password.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}<br>
-        </p>
-        <button class="btn btn-default" type="submit">Submit</button>
+        </div>
+    </div>  
+    <div class="control-group">
+        <label class="control-label" for="password">Confirm Password</label>
+        <div class="controls">
+            {{ form.confirm }}
+            {% for error in form.confirm.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+        </div>
     </div>
+    <button class="btn btn-default" type="submit">Sign Up</button>
 </form>
 
     <p> {{ check }} </p>

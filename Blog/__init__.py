@@ -1,5 +1,3 @@
-#check if necessary w/ blogapp.py
-
 from flask import Flask
 from flask.ext.login import LoginManager
 

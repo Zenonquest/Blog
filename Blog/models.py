@@ -15,13 +15,13 @@ class blogPost(object):
 
 	#creates new blog post
 	def create(self, title, text):
-		time = str(datetime.datetime.now())
+		time = str(datetime.datetime.now().date())
 		new_post = {'title':title, 'time': time, 'text': text}
 		return self.myblogs.insert_one(new_post)
 
 	#UPDATED CREATE w/ author
 	def create2(self, title, text, author):
-		time = str(datetime.datetime.now())
+		time = str(datetime.datetime.now().date())
 		new_post = {'title':title, 'time': time, 'text': text, 'author':author}
 		return self.myblogs.insert_one(new_post)
 
@@ -95,12 +95,14 @@ class blogUsers():
 
 	def viewOne(self, username):
 		user = self.myusers.find_one({'username':username})
-		fixed_user = {'_id':str(user['_id']),
-		'username':user['username'],
-		'pw_hash':user['pw_hash'], 
-		'last_seen':user['last_seen'],
-		'about_me':user['about_me']}
-		return fixed_user
+		if user:
+			fixed_user = {'_id':str(user['_id']),
+			'username':user['username'],
+			'pw_hash':user['pw_hash'], 
+			'last_seen':user['last_seen'],
+			'about_me':user['about_me']}
+			return fixed_user
+		return 
 
 	def createUser(self, username, password):
 		pw_hash = self.set_password(password) 

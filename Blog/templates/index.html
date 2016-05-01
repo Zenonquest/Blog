@@ -1,22 +1,449 @@
 {% extends "base.html" %}
 {% block content %}
+<script>
+	{% if g.user.is_authenticated %}
+	var blogentry = 'http://127.0.0.1:5000/api/blog/' + '{{ current_user.username }}';
+	{% else %}
+	var blogentry =  'http://127.0.0.1:5000/api/blog';
+	{% endif %}
+	// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog';
+	var text = [];
+	var title = [];
+	var time = [];
+	var bid = [];
 
+	function requestJSON(url, callback) {
+	    $.ajax({
+	      url: url,
+	      complete: function(xhr) {
+	        callback.call(null, xhr.responseJSON);
+	      }
+	    });
+	}
+
+	requestJSON(blogentry, function(json) {
+		var outhtml = '<h2>'+'{{ current_user.username}}&rsquo;s Most Recent Entries'+'</h2>';
+		outhtml = outhtml + '<ul>';
+
+		// json.array.length for full array
+		for (var i = 0; i < 5; i++) {
+			text.push(json.array[i].text);
+			title.push(json.array[i].title);
+			time.push(json.array[i].time);
+			bid.push(json.array[i]._id);
+			var pos = i + 1;
+			outhtml = outhtml + '<div class="container singleblog" id="singleblog' + pos + '">';
+			outhtml = outhtml + '<p>' + pos + ': ' + title[i] + '</p>';
+			outhtml = outhtml + '</div>';
+			
+		}
+		outhtml = outhtml + '</ul>';
+		outputPageContent();
+
+		function outputPageContent() {
+			$('#all-blog-titles').html(outhtml);
+		}
+
+		$('#singleblog1').on('click', function(e){
+
+				$('#all-blog-titles').hide();
+
+				var douthtml = '<h2>' + title[0] + '</h2>';
+				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[0]+'</div>';
+				douthtml = douthtml + '<p>' + text[0] + '</p>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				doutputPageContent();
+
+				$('#openeditbtn').on('click', function(e){
+					$('#buttons-blog-detail').hide();
+					$('#edit-blog-detail').show();
+					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[0] + '></textarea></div>';
+					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[0] + '></textarea></div></form></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					eoutputPageContent();
+
+					function eoutputPageContent() {
+							$('#edit-blog-detail').html(eouthtml);
+						}
+
+						$('#editbtn').on('click', function(e){
+						e.preventDefault();
+
+						var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[0];
+						// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+						var formData = {
+							'title' : $('#edit-title-area').val(),
+							'text'  : $('#edit-text-area').val()
+						};
+						
+						$.ajax({
+							type     : 'POST',
+							url      : blogentry,
+							data     : JSON.stringify(formData),
+							crossDomain : true,
+							dataType : 'json',
+							contentType : 'application/json',
+							success  : function(){
+								location.reload();
+							}
+						});
+
+					});
+
+					$('#canceleditbtn').on('click', function(){
+						$('#edit-blog-detail').hide();
+						$('#buttons-blog-detail').show();
+					});
+
+				});
+
+				$('#deletebtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[0];
+					
+					$.ajax({
+						type     : 'DELETE',
+						url      : blogentry,
+						crossDomain : true,
+						dataType : 'json',
+						contentType: 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+
+				});
+
+			function doutputPageContent() {
+				$('#single-blog-detail').html(douthtml);
+				$('#buttons-blog-detail').html(bouthtml);
+			}
+			
+
+		});
+
+		$('#singleblog2').on('click', function(e){
+
+				$('#all-blog-titles').hide();
+
+				var douthtml = '<h2>' + title[1] + '</h2>';
+				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[1]+'</div>';
+				douthtml = douthtml + '<p>' + text[1] + '</p>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				doutputPageContent();
+
+				$('#openeditbtn').on('click', function(e){
+					$('#buttons-blog-detail').hide();
+					$('#edit-blog-detail').show();
+					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[0] + '></textarea></div>';
+					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[0] + '></textarea></div></form></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					eoutputPageContent();
+
+					function eoutputPageContent() {
+						$('#edit-blog-detail').html(eouthtml);
+					}
+
+					$('#canceleditbtn').on('click', function(){
+						$('#edit-blog-detail').hide();
+						$('#buttons-blog-detail').show();
+					});
+
+				});
+
+				$('#editbtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[1];
+					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+					var formData = {
+						'title' : $('#edit-title-area').val(),
+						'text'  : $('#edit-text-area').val()
+					};
+					
+					$.ajax({
+						type     : 'POST',
+						url      : blogentry,
+						data     : JSON.stringify(formData),
+						crossDomain : true,
+						dataType : 'json',
+						contentType : 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+				});
+
+				$('#deletebtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[1];
+					
+					$.ajax({
+						type     : 'DELETE',
+						url      : blogentry,
+						crossDomain : true,
+						dataType : 'json',
+						contentType: 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+				});
+
+			function doutputPageContent() {
+				$('#single-blog-detail').html(douthtml);
+				$('#buttons-blog-detail').html(bouthtml);
+			}
+		});
+
+		$('#singleblog3').on('click', function(e){
+
+				$('#all-blog-titles').hide();
+				var douthtml = '<h2>' + title[2] + '</h2>';
+				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[2]+'</div>';
+				douthtml = douthtml + '<p>' + text[2] + '</p>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				doutputPageContent();
+
+				$('#openeditbtn').on('click', function(e){
+					$('#buttons-blog-detail').hide();
+					$('#edit-blog-detail').show();
+					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[2] + '></textarea></div>';
+					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[2] + '></textarea></div></form></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					eoutputPageContent();
+
+					function eoutputPageContent() {
+						$('#edit-blog-detail').html(eouthtml);
+					}
+
+					$('#canceleditbtn').on('click', function(){
+						$('#edit-blog-detail').hide();
+						$('#buttons-blog-detail').show();
+					});
+				});
+
+				$('#editbtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[2];
+					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+					var formData = {
+						'title' : $('#edit-title-area').val(),
+						'text'  : $('#edit-text-area').val()
+					};
+					
+					$.ajax({
+						type     : 'POST',
+						url      : blogentry,
+						data     : JSON.stringify(formData),
+						crossDomain : true,
+						dataType : 'json',
+						contentType : 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+				});
+
+				$('#deletebtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[2];
+					
+					$.ajax({
+						type     : 'DELETE',
+						url      : blogentry,
+						crossDomain : true,
+						dataType : 'json',
+						contentType: 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+				});
+
+			function doutputPageContent() {
+				$('#single-blog-detail').html(douthtml);
+				$('#buttons-blog-detail').html(bouthtml);
+			}
+		});
+
+		$('#singleblog4').on('click', function(e){
+
+				$('#all-blog-titles').hide();
+
+				var douthtml = '<h2>' + title[3] + '</h2>';
+				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[3]+'</div>';
+				douthtml = douthtml + '<p>' + text[3] + '</p>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				doutputPageContent();
+
+				$('#openeditbtn').on('click', function(e){
+					$('#buttons-blog-detail').hide();
+					$('#edit-blog-detail').show();
+					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[3] + '></textarea></div>';
+					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[3] + '></textarea></div></form></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					eoutputPageContent();
+
+					function eoutputPageContent() {
+						$('#edit-blog-detail').html(eouthtml);
+					}
+
+					$('#canceleditbtn').on('click', function(){
+						$('#edit-blog-detail').hide();
+						$('#buttons-blog-detail').show();
+					});
+				});
+
+				$('#editbtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[3];
+					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+					var formData = {
+						'title' : $('#edit-title-area').val(),
+						'text'  : $('#edit-text-area').val()
+					};
+					
+					$.ajax({
+						type     : 'POST',
+						url      : blogentry,
+						data     : JSON.stringify(formData),
+						crossDomain : true,
+						dataType : 'json',
+						contentType : 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+				});
+
+				$('#deletebtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[3];
+					
+					$.ajax({
+						type     : 'DELETE',
+						url      : blogentry,
+						crossDomain : true,
+						dataType : 'json',
+						contentType: 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+				});
+
+			function doutputPageContent() {
+				$('#single-blog-detail').html(douthtml);
+				$('#buttons-blog-detail').html(bouthtml);
+			}
+		});
+
+		$('#singleblog5').on('click', function(e){
+
+				$('#all-blog-titles').hide();
+
+				var douthtml = '<h2>' + title[4] + '</h2>';
+				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[4]+'</div>';
+				douthtml = douthtml + '<p>' + text[4] + '</p>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				doutputPageContent();
+
+				$('#openeditbtn').on('click', function(e){
+					$('#buttons-blog-detail').hide();
+					$('#edit-blog-detail').show();
+					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[4] + '></textarea></div>';
+					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[4] + '></textarea></div></form></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					eoutputPageContent();
+
+					function eoutputPageContent() {
+						$('#edit-blog-detail').html(eouthtml);
+					}
+
+					$('#canceleditbtn').on('click', function(){
+						$('#edit-blog-detail').hide();
+						$('#buttons-blog-detail').show();
+					});
+				});
+
+				$('#editbtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[4];
+					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+					var formData = {
+						'title' : $('#edit-title-area').val(),
+						'text'  : $('#edit-text-area').val()
+					};
+					
+					$.ajax({
+						type     : 'POST',
+						url      : blogentry,
+						data     : JSON.stringify(formData),
+						crossDomain : true,
+						dataType : 'json',
+						contentType : 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+				});
+
+				$('#deletebtn').on('click', function(e){
+					e.preventDefault();
+
+					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[4];
+					
+					$.ajax({
+						type     : 'DELETE',
+						url      : blogentry,
+						crossDomain : true,
+						dataType : 'json',
+						contentType: 'application/json',
+						success  : function(){
+							location.reload();
+						}
+					});
+				});
+
+			function doutputPageContent() {
+				$('#single-blog-detail').html(douthtml);
+				$('#buttons-blog-detail').html(bouthtml);
+			}
+		});
+	
+});
+</script>
+{% if message %}
+<h2>Write your first post!</h2>
+<a href="{{ url_for('create_post') }}" id = "createpostbtn" class="btn btn-primary" role="button">{{ message }}</a>
+{% else %}
 <div class="container" id="main-content">
-	<div class="jumbotron" id="jumboBlog">
-		<h2>Front Page</h2>
-			<div id="all-blog-titles" class="clearfix">
-			</div>
-			<div id="single-blog-detail" class="clearfix">
-			</div>
-      <div id="buttons-blog-detail" class="clearfix">
-      </div>
-      <div id="edit-blog-detail" class="clearfix">
-      </div>
+	<div id="all-blog-titles" class="clearfix">
+	</div>
+	<div id="single-blog-detail" class="clearfix">
+	</div>
+	<div id="buttons-blog-detail" class="clearfix">
+	</div>
+	<div id="edit-blog-detail" class="clearfix">
 	</div>
 </div>
-
-{% if current_user %}
-{{current_user.username}}
 {% endif %}
-
 {% endblock %}

@@ -1,21 +1,49 @@
 {% extends "base.html" %}
-
 {% block content %}
+
+<!-- var outhtml = '<form action="" method="POST" name="form" id="form-about-me">{{ form.hidden_tag() }}<div class="form-group"><p><label class="control-label" for="about_me">Title</label>{{ form.about_me(rows='6', cols='50') }}{% for error in form.about_me.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}</p><button class="btn btn-default" type="submit">Submit</button></div></form><p> {{ check }} </p>'; -->
   <table>
       <tr valign="top">
           <td><img src="{{ user_obj.avatar(128) }}"></td>
           <td><h1>User: {{ user.username }}</h1>
-            <p><i>About Me: {{ user['about_me']}}</i></p>
+            <p><i>About Me:
+            {% if user['about_me'] == "" %}
+            <a href='#' id="aboutmebtn" class = "btn btn-primary">+ Write some details about yourself</a>
+            {% else %}
+            {{ user['about_me']}}
+            <a href='#' id="aboutmebtn" class = "btn btn-primary">Edit About Me</a>
+            {% endif %}
+            </i></p>
+            <div id="aboutme-edit-box" class="clearfix">
+            </div>
             <p><i>Last seen on: {{ user['last_seen'] }}</i></p>
           </td>
       </tr>
   </table>
   <hr>
+  <div id="aboutme-edit-box" class="clearfix"></div>
   {% for post in posts %}
   <table>
       <tr valign="top">
-          <td><img src="{{ user_obj.avatar(50) }}"></td><td><i>{{ post.author.username }} says:</i><br>{{ post.body }}</td>
+          <td><img src="{{ user_obj.avatar(50) }}"></td><td><i>{{ post.author }} says:</i><br>{{ post.text }}</td>
       </tr>
   </table>
   {% endfor %}
+
+<script>
+  $('#aboutmebtn').on('click', function(e){
+    $('#aboutmebtn').hide();
+  var outhtml = '<form action="" method="POST" name="form" id="form-about-me">{{ form.hidden_tag() }}<div class="form-group"><p><label class="control-label" for="about_me">Title</label>{{ form.about_me(rows='6', cols='50') }}{% for error in form.about_me.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}</p><button class="btn btn-default" type="submit">Submit</button></div></form><p> {{ check }} </p>'
+
+    // var outhtml = '<div class="container"><p>TEST OUTHTML</p></div>';
+    // function outputPageContent(){
+    //   $('#aboutme-edit-box').html(outhtml);
+    // }
+    // outputPageContent();
+    $('#aboutme-edit-box').append(outhtml);
+    $('#aboutme-edit-box').show();
+});
+</script>
 {% endblock %}
+
+

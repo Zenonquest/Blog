@@ -5,7 +5,7 @@ from Blog import app, lm
 from pymongo import MongoClient
 from models import blogPost, User, blogUsers
 import datetime
-from .forms import LoginForm, SignUpForm, EditUserForm, CreatePostForm
+from .forms import LoginForm, SignUpForm, EditUserForm, CreatePostForm, AboutMeForm
 from flask import request, jsonify, redirect, render_template, url_for, flash, g
 from flask.ext.login import login_user, logout_user, login_required, current_user
 
@@ -21,10 +21,14 @@ users = blogUsers(db)
 #return all blogs as strings
 @app.route('/api/blog', methods = ['GET'])
 def view_blogposts():
-	# blog_list = blogposts.viewAll()
 	blog_list = jsonify(array=blogposts.viewAll())
-	# blog_list.headers['Access-Control-Allow-Origin']='*'
 	return blog_list 
+
+@app.route('/api/blog/<user>', methods = ['GET'])
+def view_blogposts_byauthor(user):
+	blog_list = jsonify(array=blogposts.viewAllbyAuthor(user))
+	return blog_list
+
 
 #get array of blogs(string)
 #edit old blog post
@@ -123,29 +127,24 @@ def home():
 @app.route('/index')
 @login_required
 def index():
-	posts = [  # fake array of posts
-        { 
-            'author': {'nickname': 'John'}, 
-            'body': 'Beautiful day in Portland!' 
-        },
-        { 
-            'author': {'nickname': 'Susan'}, 
-            'body': 'The Avengers movie was so cool!' 
-        }
-    ]
-	return render_template('index.html', title='Home',  posts=posts)
+	username = current_user.username
+	if blogposts.viewAllbyAuthor(username):
+		return render_template('index.html', title='Home')
+	else:
+		return render_template('index.html', message='Create')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login2():
 	form = LoginForm()
 	if request.method == 'POST':
 		user = users.viewOne(form.username.data)
-		hash_pass = user['pw_hash']
-		if User.validate_login(hash_pass, form.password.data):
-			user_obj = User(user['username'])
-			login_user(user_obj)
-			flash("Logged in successfully!", category='success')
-			return redirect(request.args.get("next") or url_for("index"))
+		if user:
+			hash_pass = user['pw_hash']
+			if User.validate_login(hash_pass, form.password.data):
+				user_obj = User(user['username'])
+				login_user(user_obj)
+				flash("Logged in successfully!", category='success')
+				return redirect(request.args.get("next") or url_for("index"))
 		flash("Wrong username or password!", category='error')
 	return render_template('login.html', form=form)
 
@@ -153,21 +152,17 @@ def login2():
 @app.route('/user/<username>')
 @login_required
 def user(username):
-    user = users.viewOne(username)
-    user_obj = User(user['username'])
-    if user == None:
-        flash('User %s not found.' % username)
-        return redirect(url_for('index'))
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user.html',
+	about_me_form = AboutMeForm()
+	user = users.viewOne(username)
+	user_obj = User(user['username'])
+	if user == None:
+		flash('User %s not found.' % username)
+		return redirect(url_for('index'))
+		posts = blogposts.viewAllbyAuthor(username)
+	return render_template('user.html',
                            user=user,
-                           posts=posts,
-                           user_obj=user_obj)
-
-
+                           user_obj=user_obj,
+                           form=about_me_form)
 
 #user logout
 @app.route('/logout')
@@ -182,26 +177,29 @@ def signup2():
 	if request.method == 'POST':
 		username = form.username.data
 		password = form.password.data
+		confirm = form.confirm.data
+		if password != confirm:
+			flash("Passwords don't match", category="error")
+			return render_template('signup.html', form=form)
 		users.createUser(username, password)
 		user = users.viewOne(username)
 		user_obj = User(user['username'])
 		login_user(user_obj)
 		flash("Signed up successfully!", category='success')
-		return redirect(request.args.get("next") or url_for("index"))
+		return redirect(request.args.get("next") or url_for("create_post"))
 	return render_template('signup.html', form=form)
 
 @app.route('/create_post', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def create_post():
 	form = CreatePostForm()
 	if request.method == 'POST':
 		author = current_user.username
 		title = form.title.data
 		text = form.text.data
-		users.create2(title, text, author)
-		return redirect(url_for('user'), username=current_user.username)
+		blogposts.create2(title, text, author)
+		return redirect(url_for('user', username=author))
 	return render_template('create.html', form=form)
-
 
 @lm.user_loader
 def load_user(username):
@@ -213,9 +211,9 @@ def load_user(username):
 @app.before_request
 def before_request():
 	g.user = current_user
-	# if g.user.is_authenticated:
-	# 	last_seen = datetime.datetime.now()
-	# 	users.update_time(g.user.username, last_seen)
+	if g.user.is_authenticated:
+		last_seen = datetime.datetime.now().date()
+		users.update_time(g.user.username, last_seen)
 
 
 #handles CORS

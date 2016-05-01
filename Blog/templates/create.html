@@ -1,3 +1,5 @@
+{% set active_page = "login" %}
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -5,21 +7,16 @@
  <form action="" method="POST" name="form" id="form-create">
     {{ form.hidden_tag() }}
     <div class="form-group">
-      <h1> 
-        {% if current_user %}
-        {{current_user.username}}
-        {% endif %}
-      </h1>
         <p>
             <label class="control-label" for="title">Title</label>
             
-            {{ form.title }}
+            {{ form.title(rows='1', cols='100') }}
             {% for error in form.title.errors %}
                 <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-            </div>
+            {% endfor %}<br><br>
+
             <label id="create-text-area" class="control-label" for="text">Text</label>
-            {{ form.text }}
+            {{ form.text(rows='10',cols='100') }}
             {% for error in form.text.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}<br>

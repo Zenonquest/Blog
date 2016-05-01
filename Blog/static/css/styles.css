@@ -1,333 +1,14 @@
-@import url('http://fonts.googleapis.com/css?family=Oldenburg');
-
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  outline: none;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-html { overflow-y: scroll; }
 body {
-  background: #fafafa url('grey.png'); /* http://subtlepatterns.com/subtle-grey/ */
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 62.5%;
-  line-height: 1;
-  color: #616161;
-  padding: 35px 0;
-}
-
-br { display: block; line-height: 1.6em; } 
-
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
-ol, ul { list-style: none; }
-
-input, textarea { 
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  outline: none; 
-}
-
-blockquote, q { quotes: none; }
-blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
-strong, b { font-weight: bold; } 
-
-table { border-collapse: collapse; border-spacing: 0; }
-img { border: 0; max-width: 100%; }
-
-h1 { 
-  font-family: 'Oldenburg', Arial, sans-serif;
-  color: #646464;
-  font-size: 4.0em;
-  line-height: 1.6em;
-  margin-bottom: 10px;
-}
-
-h2 {
-  font-size: 2.8em;
-  line-height: 1.55em;
-  margin-bottom: 4px;
-  color: #888;
-}
-
-p {
-  font-size: 1.4em;
-  line-height: 1.55em;
-  margin-bottom: 12px;
-}
-
-a { 
-  color: #8eadd2;
-}
-a:hover {
-  color: #6e91b9;
-}
-
-
-/* page structure */
-#w {
-  display: block;
-  width: 800px;
-  margin: 0 auto;
-  background: #fff;
-  padding: 15px 25px;
-  -webkit-box-shadow: 1px 2px 3px -1px rgba(0,0,0,0.4);
-  -moz-box-shadow: 1px 2px 3px -1px rgba(0,0,0,0.4);
-  box-shadow: 1px 2px 3px -1px rgba(0,0,0,0.4);
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
-
-#ghapidata {
-  display: block;
-  padding: 25px 0;
-}
-
-#loader {
-  display: block;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-}
-
-
-/* page content styles */
-.smallname {
-  font-size: 0.75em;
-  color: #a9a9a9;
-  font-style: italic;
-}
-
-.avi {
-  float: left;
-  margin-right: 7px;
-  margin-bottom: 7px;
-}
-.avi img {
-  border: 1px solid #ccc;
-  padding: 3px;
-}
-
-.repolist {
-  display: block;
-  clear: both;
-  width: 100%;
-}
-.repolist ul {
-  font-size: 1.2em;
-}
-.repolist ul li {
-  display: block;
-}
-.repolist ul li a {
-  font-weight: bold;
-  padding: 6px 9px;
-  display: block;
-  float: left;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  text-decoration: none;
-  border: 1px solid #356492;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  color: #fff;
-  background-color: #3673af;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#5597d8), to(#3673af));
-  background-image: -webkit-linear-gradient(top, #5597d8, #3673af);
-  background-image: -moz-linear-gradient(top, #5597d8, #3673af);
-  background-image: -ms-linear-gradient(top, #5597d8, #3673af);
-  background-image: -o-linear-gradient(top, #5597d8, #3673af);
-  background-image: linear-gradient(top, #5597d8, #3673af);
-}
-.repolist ul li a:hover {
-  background-color: #396895;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#4b87c2), to(#396895));
-  background-image: -webkit-linear-gradient(top, #4b87c2, #396895);
-  background-image: -moz-linear-gradient(top, #4b87c2, #396895);
-  background-image: -ms-linear-gradient(top, #4b87c2, #396895);
-  background-image: -o-linear-gradient(top, #4b87c2, #396895);
-  background-image: linear-gradient(top, #4b87c2, #396895);
-}
-.repolist ul li a:active {
-  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
-  -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
-  box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
-}
-
-.repolist ul li a span {
-  font-family: "Courier New", Courier, "Lucida Typewriter", monospace;
-  font-size: 0.9em;
-}
-
-/* input field */
-#ghusername {
-  display: block;
-  padding: 5px 8px;
-  font-size: 1.4em;
-  color: #666;
-  width: 550px;
-  margin-bottom: 15px;
-}
-
-#ghsubmitbtn {
-  display: inline-block;
-  padding: 8px 18px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #444;
-  text-decoration: none;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.8);
-  background-color: #eaeaea;
-  background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
-  background-image: -moz-linear-gradient(#fafafa, #eaeaea);
-  background-image: -ms-linear-gradient(top, #fafafa, #eaeaea);
-  background-image: -o-linear-gradient(top, #fafafa, #eaeaea);
-  background-image: linear-gradient(#fafafa, #eaeaea);
-  border-radius: 3px;
-  border: 1px solid #ddd;
-  border-bottom-color: #c5c5c5;
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-#ghsubmitbtn:hover {
-  background-color: #dadada;
-  background-image: -webkit-linear-gradient(#eaeaea, #dadada);
-  background-image: -moz-linear-gradient(#eaeaea, #dadada);
-  background-image: -ms-linear-gradient(top, #eaeaea, #dadada);
-  background-image: -o-linear-gradient(top, #eaeaea, #dadada);
-  background-image: linear-gradient(#eaeaea, #dadada);
-  border-color: #ccc #ccc #b5b5b5;
-}
-#ghsubmitbtn:active {
-  background-color:#dadada;
-  background-image: none;
-  border-color: #b5b5b5;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
-  -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
-  box-shadow: inset 0 3px 5px rgba(0,0,0,0.25);
-}
-
-/* clearfix */
-.clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
-.clearfix { display: inline-block; }
- 
-html[xmlns] .clearfix { display: block; }
-* html .clearfix { height: 1%; }
-
-li a {
-  color:black;
-  font-size: 20px;
-}
-
-
-
-/*Edited body from Codecademy*/
-body{
-  background-color:#202024;
-  /*background:  url('images/woodbg.gif') no-repeat center center fixed;*/
-  -webkit-background-size: cover; /* For WebKit*/
-  -moz-background-size: cover;    /* Mozilla*/
-  -o-background-size: cover;      /* Opera*/
-  background-size: cover;         /* Generic*/
-  left: 0;
-  margin: 0;
-  overflow: auto;
-  position: relative;
-  color: white;
-
-}
-
-h1{
-  margin: 0px;
-  font-family: 'Yanone Kaffeesatz', sans-serif;
-}
-
-
-.container1{
-   padding: 10px;
-   position: relative;
-   bottom: 0;
-   left:auto;
-   right:auto ;
-   text-align: justify;
-   font-family: 'Yanone Kaffeesatz', sans-serif;
-   background-color: black;
-   border-radius: 5px;
-   margin-left:20px;
-  margin-right:20px;
-}
-
-
-.container1 li{
-  color:white;
-}
-
-.whitecontainer{
-  padding: 20px;
-  margin: 20px;
-  position: relative;
-  bottom: 0;
-  left:auto;
-  right:auto ;
-  text-align: justify;
+  background: #fafafa url('grey.png');
+  background-size: cover;
   font-family: 'Roboto', sans-serif;
-  background-color: white;
-  border-radius: 5px;
 }
 
-.singlesite{
-  padding:10px;
-}
-.img-circle{
-  display: block;
-  margin-left:auto;
-  margin-right: auto;
-}
-
-/*Edited Jumbotron from Codecademy*/
-.jumbotron {
-  background-color:white;
-  color:black;
-  -webkit-background-size: cover;
-   -moz-background-size: cover;
-     -o-background-size: cover;
-        background-size: cover;
-  position: relative;
-
-
-}
-
-.jumbotron h1{
-  font-family: 'Yanone Kaffeesatz', sans-serif;
-  position: relative;
-}
-
-.jumbotron p{
-   padding-top: 0px;
-   font-size: 16px;
-}
-
-
-/*--From Codecademy--*/
 /* Initial menu */
 .menu {
   background: #202024 url('http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/uber/black-thread.png') repeat left top;
   left: -285px;  /* start off behind the scenes */
+  top: -5px;
   height: 100%;
   position: fixed;
   width: 285px;
@@ -382,371 +63,73 @@ h1{
   margin-right: 5px;
 }
 
-.row{
-  padding-left:10px;
-  padding-right:10px;
-  color:white;
-  font-size: 22px;
+.navbar {
+  margin-bottom: 20px;
+  font-family: 'Roboto',sans-serif;
 }
+ 
+#navbar-right {
+  float:right;
+} 
 
-.row p{
-  font-family: 'Roboto', sans-serif;
-}
-
-.col-xs-4{
-  padding-top:10px;
-}
-
-.col-sm-4{
-  padding-top:10px;
-}
-
-.jumbotron-first{
-  background-color: black;
-  /*background-image: url('images/americanspatter.jpg'); */
-  height:800px;
-  background-size:100%;
-  margin-top:-15px;
-}
-
-.jumbotron-second{
-  background-color:black;
-  padding-left: 10px;
-  padding-top:40px;
+body {
+  padding-top: 70px;
   position: relative;
-
 }
 
-.jumbotron-head{
-  height:140px;
+.form-group input{
+  /*padding-left: 5px;*/
+  float: right;
 }
 
-.pubdate{
-  color:white;
-  font-size: 12px;
-
+.control-group {
+  padding-bottom: 5px;
 }
 
-.sitecontainer{
-  font-family: 'Yanone Kaffeesatz', sans-serif;
-  color:white;
-  font-size: 26px;
-  padding-left: 0px;
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1170px;
 }
 
-.sitecontainer ul{
-  color:white;
-  padding-left: 20px;
+#login-form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
 }
 
-.sitecontainer a{
-  color:white;
+#signup-form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
 }
 
-.site-content-container{
-  color:black;
-  padding: 20px;
-}
-
-.icon-menu{
-  font-family: 'Yanone Kaffeesatz',sans-serif;
-  font-size: 30px;
-  line-height: 1.5;
-  padding-left:16px;
-  padding-right:16px;
-  padding-bottom:0px;
-  margin-left:-20px;
-  margin-top:-3px;
-}
-
-form {
-    /* Just to center the form on the page */
-    /*margin: 0 auto;*/
-    width: 300px;
-    /* To see the outline of the form */
-    padding: 20px;
-    margin-left: 40px;
-    border: 1px solid #CCC;
-    border-radius: 1em;
-    font-family: 'Roboto', sans-serif;
-}
-
-form div + div {
-    margin-top: 1em;
-}
-
-
-label {
-    /* To make sure that all labels have the same size and are properly aligned */
-    display: inline-block;
-    width: 200px;
-    text-align: left;
-}
-
-input, textarea {
-    /* To make sure that all text fields have the same font settings
-       By default, textareas have a monospace font */
-    font: 1em sans-serif;
-    font-family: 'Roboto', sans-serif;
-
-    /* To give the same size to all text field */
-    width: 150px;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-    /* To harmonize the look & feel of text field border */
-    border: 1px solid #999;
-}
-
-input:focus, textarea:focus {
-    /* To give a little highlight on active elements */
-    border-color: #000;
-}
-
-input{
-    color: green;
-    margin-left:10px;
-    margin-top: 10px;
-}
-
-.rdio input{
-  width:40px;
-  padding-left: 0px;
-  margin-top: 0px;
-
-}
-
-.whitecontainer form{
-  margin: auto;
-  width: 500px;
-}
-
-textarea {
-    /* To properly align multiline text fields with their labels */
-    vertical-align: top;
-
-    /* To give enough room to type some text */
-    height: 5em;
-
-    /* To allow users to resize any textarea vertically
-       It does not work on every browsers */
-    resize: vertical;
-}
-
-.whitecontainer textarea,input{
-  width: 200px;
-  margin: auto;
-  color: black;
-}
-
-.whitecontainer label{
-  width:100px;
-  color: black;
-}
-
-.button {
-    /* To position the buttons to the same position of the text fields */
-    padding-left: 90px; /* same size as the label elements */
-}
-button {
-    /* This extra margin represent roughly the same space as the space
-       between the labels and their text fields */
-    margin-left: .5em;
-
-}
-
-.whitecontainer .button{
-  padding-left: 10px;
-}
-
-#blogdata {
-  display: block;
-  padding: 25px 0;
-}
-
-#jumboBlog {
-  /*font-family:'Roboto';*/
-  font-family: 'Open Sans', sans-serif;
-}
-
-#jumboBlog h1{
-  /*font-family:'Roboto';*/
-  font-family: 'Roboto', serif;
-}
-
-#singleblog {
-  padding: 10px;
-  padding-left: 5px;
-}
-
-#editbox {
-  padding: 0px;
-}
-
-#editbox form {
-  margin: 0px;
-  padding: 0px;
-  padding-bottom: 20px;
-}
-
-#editbox textarea {
-  height: 100px;
-}
-
-.counter {
-  display: inline;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-right: 10px;
-}
-
-#counter-create {
-  margin-left: 15px;
-  margin-right: 20px;
-  margin-top: 20px;
-}
-
-#counter-edit {
-  padding-left: 50px;
-  margin-bottom: 0px;
-}
-
-#btn-create {
-  margin-left: 15px;
-  margin-right: 20px;
-  margin-top: 20px;
-}
-
-#edit-text-box {
-  padding-bottom: 0px;
-}
-
-#form-create {
-  padding-bottom: 0px;
-  margin-right: 10px;
-  margin-left: 0px;
-  width: 100%;
-}
-
-#form-edit {
-  padding-bottom: 0px;
-  margin-right: 10px;
-  margin-left: 0px;
-  width: auto;
-}
-
-#buttons-blog-detail {
-  padding-left: 0px;
-}
-
-#single-blog-detail {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  margin: 0px;
+.flash-message {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+  padding-left:-40px;
+  color: blue;
 }
 
 #btns-box {
-  display: inline-block;
   padding-left: 0px;
 }
 
-#btns-box .btn{
-  display: inline-block;
-  padding: 10px;
-  margin-right: 10px;
-  width: auto;
+#btns-box a {
+  margin: 5px;
+  margin-left: 0px;
 }
 
 #btns-box-final {
-  display: inline-block;
   padding-left: 0px;
 }
 
-#btns-box-final .btn{
-  display: inline-block;
-  padding: 10px;
-  margin-right: 10px;
-  width: auto;
-}
-
-#all-blog-titles p{
-  font-size: 24px;
-}
-.singleblog {
-  padding-left: 0px;
-}
-.singleblog li{
-  font-size: 20px;
-}
-
-.singleblog h2{
-  font-size: 24px;
-}
-
-.singleblog p{
-  font-size: 20px;
-}
-
-#single-blog-detail h2{
-  font-size: 24px;
-}
-
-#edit-box {
-  padding-left:0px;
-  padding-bottom: 10px;
-  margin-left:0px;
-  width: 90%;
-}
-
-#login-user-detail {
-  width: 20%;
-  float: right;
-  background: white;
-  z-index:1000;
-  position: relative;
-  outline: black dotted;
-}
-
-#navbar-signup {
-  float:right;
-}
-
-#form-login {
+#btns-box-final a {
+  margin: 5px;
   margin-left: 0px;
-  margin-right: 0px;
-  padding:5px;
-  z-index: 1000;
 }
 
-#form-login form{
-  padding-bottom: 0px;
-
+td {
+  padding-right: 10px;
 }
-
-.btn-login {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 5px;
-}
-
-#login-username-area {
-  margin-top: 10px;
-}
-
-#login-form p{
-  color: black;
-}
-
-#create-form p{
-  color: black;
-}
-
-#create-form input{
-  width: 80%;
-}
-
-
-td{
-  color: black;
-}
-

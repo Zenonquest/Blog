@@ -1,6 +1,10 @@
 $(document).ready(function(){
 
-	var blogentry = 'http://127.0.0.1:5000/api/blog';
+	{% if g.user.is_authenticated() %}
+	var blogentry = 'http://127.0.0.1:5000/api/blog/' + current_user.username;
+	{% else %}
+	var blogentry =  'http://127.0.0.1:5000/api/blog';
+	{% endif %}
 	// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog';
 	var text = [];
 	var title = [];
