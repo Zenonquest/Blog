@@ -8,14 +8,14 @@
     {{ form.hidden_tag() }}
     <div class="form-group">
         <p>
-            <label class="control-label" for="title">Title</label>
+            <label class="control-label" for="title">Post Title</label>
             
             {{ form.title(rows='1', cols='100') }}
             {% for error in form.title.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}<br><br>
 
-            <label id="create-text-area" class="control-label" for="text">Text</label>
+            <label id="create-text-area" class="control-label" for="text">Post Body</label>
             {{ form.text(rows='10',cols='100') }}
             {% for error in form.text.errors %}
                 <span style="color: red;">[{{ error }}]</span>
