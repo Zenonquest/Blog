@@ -26,7 +26,8 @@
 		outhtml = outhtml + '<ul>';
 
 		// json.array.length for full array
-		for (var i = 0; i < 5; i++) {
+		var i = 0;
+		while (json.array[i]) {
 			text.push(json.array[i].text);
 			title.push(json.array[i].title);
 			time.push(json.array[i].time);
@@ -35,8 +36,9 @@
 			outhtml = outhtml + '<div class="container singleblog" id="singleblog' + pos + '">';
 			outhtml = outhtml + '<p>' + pos + ': ' + title[i] + '</p>';
 			outhtml = outhtml + '</div>';
-			
+			i++;
 		}
+
 		outhtml = outhtml + '</ul>';
 		outputPageContent();
 
@@ -44,17 +46,28 @@
 			$('#all-blog-titles').html(outhtml);
 		}
 
+		// show the contents of a single blog post
 		$('#singleblog1').on('click', function(e){
 
 				$('#all-blog-titles').hide();
+				$('#single-blog-detail').show();
+				$('#buttons-blog-detail').show();
 
-				var douthtml = '<h2>' + title[0] + '</h2>';
+				var douthtml = '<h2 id="singleblog1-title">' + title[0] + '</h2>';
 				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[0]+'</div>';
 				douthtml = douthtml + '<p>' + text[0] + '</p>';
 				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
 				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
 				doutputPageContent();
 
+				// hide the single blog post, show all posts
+				$('#singleblog1-title').on('click', function (e) {
+					$('#all-blog-titles').show();
+					$('#single-blog-detail').hide();
+					$('#buttons-blog-detail').hide();
+				});
+
+				// show edit box for single blog post
 				$('#openeditbtn').on('click', function(e){
 					$('#buttons-blog-detail').hide();
 					$('#edit-blog-detail').show();
@@ -65,10 +78,11 @@
 					eoutputPageContent();
 
 					function eoutputPageContent() {
-							$('#edit-blog-detail').html(eouthtml);
-						}
-
-						$('#editbtn').on('click', function(e){
+						$('#edit-blog-detail').html(eouthtml);
+					}
+					
+					//submit edit
+					$('#editbtn').on('click', function(e){
 						e.preventDefault();
 
 						var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[0];

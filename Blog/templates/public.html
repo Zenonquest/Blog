@@ -18,8 +18,8 @@
 	}
 
 	requestJSON(blogentry, function(json) {
-		var outhtml = '<h2>'+'Public Page'+'</h2>';
-		// outhtml = outhtml + '<li>';
+		var outhtml = '<h2>'+'Most Recent Entries'+'</h2>';
+		outhtml = outhtml + '<ul>';
 
 		// json.array.length for full array
 		var i = 0;
@@ -30,19 +30,20 @@
 			bid.push(json.array[i]._id);
 			var pos = i + 1;
 			outhtml = outhtml + '<div class="container singleblog" id="singleblog' + pos + '">';
-			outhtml = outhtml + '<h3>' + pos + ': ' + title[i] + '</h3>';
-			outhtml = outhtml + '<p>' + text[i].substr(0,50) + '</p>';
+			outhtml = outhtml + '<p>' + pos + ': ' + title[i] + '</p>';
+			outhtml = outhtml + '<p>' + text[i] + '</p>';
 			outhtml = outhtml + '</div>';
 			i++;
 		}
 
-		// outhtml = outhtml + '</li>';
+		outhtml = outhtml + '</ul>';
 		outputPageContent();
 
 		function outputPageContent() {
 			$('#all-blog-titles').html(outhtml);
 		}
 	});
+	
 </script>
 
 <div class="container" id="main-content">

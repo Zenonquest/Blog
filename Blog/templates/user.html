@@ -14,14 +14,14 @@
             <a href='#' id="aboutmebtn" class = "btn btn-primary">Edit About Me</a>
             {% endif %}
             </i></p>
-            <div id="aboutme-edit-box" class="clearfix">
+            <div id="edit-aboutme-detail" class="clearfix">
             </div>
             <p><i>Last seen on: {{ user['last_seen'] }}</i></p>
           </td>
       </tr>
   </table>
   <hr>
-  <div id="aboutme-edit-box" class="clearfix"></div>
+  <!-- <div id="edit-aboutme-detail" class="clearfix"></div> -->
   {% for post in posts %}
   <table>
       <tr valign="top">
@@ -31,17 +31,62 @@
   {% endfor %}
 
 <script>
-  $('#aboutmebtn').on('click', function(e){
-    $('#aboutmebtn').hide();
-  var outhtml = '<form action="" method="POST" name="form" id="form-about-me">{{ form.hidden_tag() }}<div class="form-group"><p><label class="control-label" for="about_me">Title</label>{{ form.about_me(rows='6', cols='50') }}{% for error in form.about_me.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}</p><button class="btn btn-default" type="submit">Submit</button></div></form><p> {{ check }} </p>'
+//   $('#aboutmebtn').on('click', function(e){
+//     $('#aboutmebtn').hide();
+//     var outhtml = '<form action="" method="POST" name="form" id="form-about-me">{{ form.hidden_tag() }}<div class="form-group"><p><label class="control-label" for="about_me">Title</label>{{ form.about_me(rows='6', cols='50') }}{% for error in form.about_me.errors %}<span style="color: red;">[{{ error }}]</span>{% endfor %}</p><button class="btn btn-default" type="submit">Submit</button></div></form><p> {{ check }} </p>'
 
-    // var outhtml = '<div class="container"><p>TEST OUTHTML</p></div>';
-    // function outputPageContent(){
-    //   $('#aboutme-edit-box').html(outhtml);
-    // }
-    // outputPageContent();
-    $('#aboutme-edit-box').append(outhtml);
-    $('#aboutme-edit-box').show();
+//     //asdf
+
+
+//     // var outhtml = '<div class="container"><p>TEST OUTHTML</p></div>';
+//     // function outputPageContent(){
+//     //   $('#aboutme-edit-box').html(outhtml);
+//     // }
+//     // outputPageContent();
+//     $('#aboutme-edit-box').append(outhtml);
+//     $('#aboutme-edit-box').show();
+// });
+$('#aboutmebtn').on('click', function(e){
+  $('#aboutmebtn').hide();
+  $('#edit-aboutme-detail').show();
+  var eouthtml = '<div class="container" id=edit-aboutme-box><form id="form-aboutme-edit">';
+  eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-aboutme-area" name="text" rows="8" placeholder=' + '"I Like Turtles"' + '></textarea></div></form></div>';
+  eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "" id="confirm-aboutme-btn" class="btn btn-primary" role="button">Confirm Edit</a>';
+  eouthtml = eouthtml + '<a href = "" id = "cancel-aboutme-btn" class="btn btn-primary" role="button">Cancel Edit</a>';
+  eoutputPageContent();
+
+  function eoutputPageContent() {
+    $('#edit-aboutme-detail').html(eouthtml);
+  }
+    
+  //submit edit
+  $('#confirm-aboutme-btn').on('click', function(e){
+    e.preventDefault();
+
+    var aboutme = 'http://127.0.0.1:5000/api/aboutme/'+ '{{user["username"]}}';
+    // var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+    var formData = {
+      'about_me'  : $('#edit-aboutme-area').val()
+    };
+    
+    $.ajax({
+      type     : 'POST',
+      url      : aboutme,
+      data     : JSON.stringify(formData),
+      crossDomain : true,
+      dataType : 'json',
+      contentType : 'application/json',
+      success  : function(){
+        location.reload();
+      }
+    });
+
+    // user['about_me'] = formData['text']
+  });
+
+  $('#cancel-aboutme-btn').on('click', function(){
+    $('#edit-aboutme-detail').hide();
+  });
 });
 </script>
 {% endblock %}

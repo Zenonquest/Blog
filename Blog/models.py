@@ -29,25 +29,55 @@ class blogPost(object):
 	def viewAll(self):
 		all_posts = []
 		for each_post in self.myblogs.find().sort('time',-1):
-			all_posts.append(
-				{'_id':str(each_post['_id']),
-				'title':each_post['title'].encode('utf-8'),
-				'text':each_post['text'].encode('utf-8'),
-				'time':each_post['time'].encode('utf-8'),
-				'author':each_post['author'].encode('utf-8')}
-				)
+			each_dict = {'_id': str(each_post['_id'])}
+
+			if 'title' in each_post:
+				each_dict['title'] = each_post['title'].encode('utf-8')
+
+			if 'text' in each_post:
+				each_dict['text'] = each_post['text'].encode('utf-8')
+
+			if 'time' in each_post:
+				each_dict['time'] = each_post['time'].encode('utf-8')
+
+			if 'author' in each_post:
+				each_dict['author'] = each_post['author'].encode('utf-8')
+
+			all_posts.append(each_dict)
+			# all_posts.append(
+			# 	{'_id':str(each_post['_id']),
+			# 	'title':each_post['title'].encode('utf-8'),
+			# 	'text':each_post['text'].encode('utf-8'),
+			# 	'time':each_post['time'].encode('utf-8'),
+			# 	'author':each_post['author'].encode('utf-8')}
+			# 	)
 		return (all_posts)
 
 	def viewAllbyAuthor(self, username):
 		all_posts = []
 		for each_post in self.myblogs.find({'author':username}).sort('time', -1):
-			all_posts.append(
-				{'_id':str(each_post['_id']),
-				'title':each_post['title'].encode('utf-8'),
-				'text':each_post['text'].encode('utf-8'),
-				'time':each_post['time'].encode('utf-8'),
-				'author':each_post['author'].encode('utf-8')}
-				)
+			each_dict = {'_id': str(each_post['_id'])}
+
+			if (each_post['title']):
+				each_dict['title'] = each_post['title'].encode('utf-8')
+
+			if (each_post['text']):
+				each_dict['text'] = each_post['text'].encode('utf-8')
+
+			if (each_post['time']):
+				each_dict['time'] = each_post['time'].encode('utf-8')
+
+			if (each_post['author']):
+				each_dict['author'] = each_post['author'].encode('utf-8')
+
+			all_posts.append(each_dict)
+			# all_posts.append(
+			# 	{'_id':str(each_post['_id']),
+			# 	'title':each_post['title'].encode('utf-8'),
+			# 	'text':each_post['text'].encode('utf-8'),
+			# 	'time':each_post['time'].encode('utf-8'),
+			# 	'author':each_post['author'].encode('utf-8')}
+			# 	)
 		return (all_posts)
 
 	#return chosen blog post
@@ -118,6 +148,9 @@ class blogUsers():
 	def update_time(self, username, last_seen):
 		self.myusers.update_one({'username':username}, {'$set': {'last_seen':str(last_seen)}})
 
+	def edit_aboutme(self, username, about_me):
+		self.myusers.update_one({'username':username}, {'$set': {'about_me': about_me}})
+
 	#for testing purposes
 	def editUser(self, username, pw_hash, about_me):
 		self.myusers.update_one({'username':username}, {'$set': {'about_me':about_me}})
@@ -146,6 +179,9 @@ class User():
 
 	def get_id(self):
 		return self.username
+
+	def get_username(self):
+		return str(self.username)
 
 	def avatar(self, size):
 		self.email = self.username + '@gmail.com' #tmp email
