@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
 	{% if g.user.is_authenticated() %}
-	var blogentry = 'http://127.0.0.1:5000/api/blog/' + current_user.username;
+	var blogentry = 'https://questblog.herokuapp.com/api/blog/' + current_user.username;
 	{% else %}
-	var blogentry =  'http://127.0.0.1:5000/api/blog';
+	var blogentry =  'https://questblog.herokuapp.com/api/blog';
 	{% endif %}
 	// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog';
 	var text = [];
@@ -65,7 +65,7 @@ $(document).ready(function(){
 						$('#editbtn').on('click', function(e){
 						e.preventDefault();
 
-						var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[0];
+						var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[0];
 						// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 						var formData = {
 							'title' : $('#edit-title-area').val(),
@@ -98,7 +98,7 @@ $(document).ready(function(){
 				$('#deletebtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[0];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[0];
 					
 					$.ajax({
 						type     : 'DELETE',
@@ -157,7 +157,7 @@ $(document).ready(function(){
 				$('#editbtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[1];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[1];
 					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 					var formData = {
 						'title' : $('#edit-title-area').val(),
@@ -181,7 +181,7 @@ $(document).ready(function(){
 				$('#deletebtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[1];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[1];
 					
 					$.ajax({
 						type     : 'DELETE',
@@ -240,7 +240,7 @@ $(document).ready(function(){
 				$('#editbtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[2];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[2];
 					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 					var formData = {
 						'title' : $('#edit-title-area').val(),
@@ -264,7 +264,7 @@ $(document).ready(function(){
 				$('#deletebtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[2];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[2];
 					
 					$.ajax({
 						type     : 'DELETE',
@@ -323,7 +323,7 @@ $(document).ready(function(){
 				$('#editbtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[3];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[3];
 					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 					var formData = {
 						'title' : $('#edit-title-area').val(),
@@ -347,7 +347,7 @@ $(document).ready(function(){
 				$('#deletebtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[3];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[3];
 					
 					$.ajax({
 						type     : 'DELETE',
@@ -406,7 +406,7 @@ $(document).ready(function(){
 				$('#editbtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[4];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[4];
 					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 					var formData = {
 						'title' : $('#edit-title-area').val(),
@@ -430,7 +430,7 @@ $(document).ready(function(){
 				$('#deletebtn').on('click', function(e){
 					e.preventDefault();
 
-					var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[4];
+					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[4];
 					
 					$.ajax({
 						type     : 'DELETE',
@@ -468,7 +468,7 @@ $(document).ready(function(){
 		// 		$('#editbtn').on('click', function(e){
 		// 			e.preventDefault();
 
-		// 			var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid[0];
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[0];
 		// 			// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 		// 			var formData = {
 		// 				'title' : $('#edit-title-box').val(),

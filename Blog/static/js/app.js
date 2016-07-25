@@ -28,7 +28,7 @@ var main = function(){
 			'<div id="loader"><img src="css/loader.gif" alt="loading..."></div>');
 
 		var bid = $('#objectId').val();
-		var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid;
+		var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid;
 		// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 
 		requestJSON(blogentry, function(json) {
@@ -58,7 +58,7 @@ var main = function(){
 	//submit create form
 	$('#btn-create').on('click', function(e){
 		e.preventDefault();
-		var blogentry = 'http://127.0.0.1:5000/api/blog';
+		var blogentry = 'https://questblog.herokuapp.com/api/blog';
 
 		//get form data
 		formData = {
@@ -83,7 +83,7 @@ var main = function(){
 	//submit create form
 	$('#btn-newuser').on('click', function(e){
 		e.preventDefault();
-		var newuserURL = 'http://127.0.0.1:5000/api/signup';
+		var newuserURL = 'https://questblog.herokuapp.com/api/signup';
 
 		//get form data
 		formData = {
@@ -91,7 +91,7 @@ var main = function(){
 			'password'  : $('#create-password-area').val()
 		};
 
-		// var blogentry = 'http://127.0.0.1:5000/api/blog';
+		// var blogentry = 'https://questblog.herokuapp.com/api/blog';
 		$.ajax({
 			type     : 'POST',
 			url      : newuserURL,
@@ -126,7 +126,7 @@ var main = function(){
 
 		$('#btn-login-submit').on('click', function(e){
 			e.preventDefault();
-			var loginURL = 'http://127.0.0.1:5000/api/login';
+			var loginURL = 'https://questblog.herokuapp.com/api/login';
 
 			//get form data 
 			formData = {
@@ -234,7 +234,7 @@ $(document).ready(main);
 	// 	}
 
 	// 	var bid = getUrlVars()["bid"]
-	// 	var blogentry = 'http://127.0.0.1:5000/api/blog/'+ bid;
+	// 	var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid;
 	// 	// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
 
 	// 	requestJSON(blogentry, function(json) {
@@ -267,7 +267,7 @@ $(document).ready(main);
 		$('#blogdata').html(
 			'<div id="loader"><img src="css/loader.gif" alt="loading..."></div>');
 
-		var blogentry = 'http://127.0.0.1:5000/api/blog';
+		var blogentry = 'https://questblog.herokuapp.com/api/blog';
 		// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog';
 
 		requestJSON(blogentry, function(json) {
