@@ -63,7 +63,7 @@ $('#aboutmebtn').on('click', function(e){
   $('#confirm-aboutme-btn').on('click', function(e){
     e.preventDefault();
 
-    var aboutme = 'http://127.0.0.1:5000/api/aboutme/'+ '{{user["username"]}}';
+    var aboutme = 'https://questblog.herokuapp.com/api/aboutme/'+ '{{user["username"]}}';
     // var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
     var formData = {
       'about_me'  : $('#edit-aboutme-area').val()
