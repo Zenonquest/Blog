@@ -132,7 +132,7 @@ def login2():
 			if User.validate_login(hash_pass, form.password.data):
 				user_obj = User(user['username'])
 				login_user(user_obj)
-				flash("Logged in successfully!", category='success')
+				# flash("Logged in successfully!", category='success')
 				return redirect(request.args.get("next") or url_for("index"))
 		flash("Wrong username or password!", category='error')
 	return render_template('login.html', form=form)
