@@ -223,7 +223,8 @@ def create_post():
 		title = form.title.data
 		text = form.text.data
 		blogposts.create2(title, text, author)
-		return redirect(url_for('user', username=author))
+		return redirect(url_for('index'))
+		# return redirect(url_for('user', username=author))
 	return render_template('create.html', form=form)
 
 
