@@ -139,29 +139,65 @@
 
 		});
 
+				// show the contents of a single blog post
 		$('#singleblog2').on('click', function(e){
 
 				$('#all-blog-titles').hide();
+				$('#single-blog-detail').show();
+				$('#buttons-blog-detail').show();
 
-				var douthtml = '<h2>' + title[1] + '</h2>';
+				var douthtml = '<h2 id="singleblog2-title">' + title[1] + '</h2>';
 				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[1]+'</div>';
 				douthtml = douthtml + '<p>' + text[1] + '</p>';
-				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
-				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn2" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn2" class="btn btn-primary" role="button">Delete This Entry</a></div>';
 				doutputPageContent();
 
+				// hide the single blog post, show all posts
+				$('#singleblog2-title').on('click', function (e) {
+					$('#all-blog-titles').show();
+					$('#single-blog-detail').hide();
+					$('#buttons-blog-detail').hide();
+				});
+
+				// show edit box for single blog post
 				$('#openeditbtn').on('click', function(e){
 					$('#buttons-blog-detail').hide();
 					$('#edit-blog-detail').show();
-					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[0] + '></textarea></div>';
-					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[0] + '></textarea></div></form></div>';
-					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
-					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[1] + '></textarea></div>';
+					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[1] + '></textarea></div></form></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn2" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn2" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
 					eoutputPageContent();
 
 					function eoutputPageContent() {
 						$('#edit-blog-detail').html(eouthtml);
 					}
+					
+					//submit edit
+					$('#editbtn2').on('click', function(e){
+						e.preventDefault();
+
+						var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[1];
+						// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+						var formData = {
+							'title' : $('#edit-title-area').val(),
+							'text'  : $('#edit-text-area').val()
+						};
+						
+						$.ajax({
+							type     : 'POST',
+							url      : blogentry,
+							data     : JSON.stringify(formData),
+							crossDomain : true,
+							dataType : 'json',
+							contentType : 'application/json',
+							success  : function(){
+								location.reload();
+							}
+						});
+
+					});
 
 					$('#canceleditbtn').on('click', function(){
 						$('#edit-blog-detail').hide();
@@ -170,30 +206,7 @@
 
 				});
 
-				$('#editbtn').on('click', function(e){
-					e.preventDefault();
-
-					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[1];
-					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
-					var formData = {
-						'title' : $('#edit-title-area').val(),
-						'text'  : $('#edit-text-area').val()
-					};
-					
-					$.ajax({
-						type     : 'POST',
-						url      : blogentry,
-						data     : JSON.stringify(formData),
-						crossDomain : true,
-						dataType : 'json',
-						contentType : 'application/json',
-						success  : function(){
-							location.reload();
-						}
-					});
-				});
-
-				$('#deletebtn').on('click', function(e){
+				$('#deletebtn2').on('click', function(e){
 					e.preventDefault();
 
 					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[1];
@@ -208,67 +221,168 @@
 							location.reload();
 						}
 					});
+
 				});
 
 			function doutputPageContent() {
 				$('#single-blog-detail').html(douthtml);
 				$('#buttons-blog-detail').html(bouthtml);
 			}
+			
+
 		});
 
+		// $('#singleblog2').on('click', function(e){
+
+		// 		$('#all-blog-titles').hide();
+		// 		$('#single-blog-detail').show();
+		// 		$('#buttons-blog-detail').show();
+
+		// 		var douthtml = '<h2>' + title[1] + '</h2>';
+		// 		douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[1]+'</div>';
+		// 		douthtml = douthtml + '<p>' + text[1] + '</p>';
+		// 		var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+		// 		bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+		// 		doutputPageContent();
+
+		// 		$('#openeditbtn').on('click', function(e){
+		// 			$('#buttons-blog-detail').hide();
+		// 			$('#edit-blog-detail').show();
+		// 			var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[0] + '></textarea></div>';
+		// 			eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[0] + '></textarea></div></form></div>';
+		// 			eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+		// 			eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+		// 			eoutputPageContent();
+
+		// 			function eoutputPageContent() {
+		// 				$('#edit-blog-detail').html(eouthtml);
+		// 			}
+
+		// 			$('#canceleditbtn').on('click', function(){
+		// 				$('#edit-blog-detail').hide();
+		// 				$('#buttons-blog-detail').show();
+		// 			});
+
+		// 		});
+
+		// 		$('#editbtn').on('click', function(e){
+		// 			e.preventDefault();
+
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[1];
+		// 			// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+		// 			var formData = {
+		// 				'title' : $('#edit-title-area').val(),
+		// 				'text'  : $('#edit-text-area').val()
+		// 			};
+					
+		// 			$.ajax({
+		// 				type     : 'POST',
+		// 				url      : blogentry,
+		// 				data     : JSON.stringify(formData),
+		// 				crossDomain : true,
+		// 				dataType : 'json',
+		// 				contentType : 'application/json',
+		// 				success  : function(){
+		// 					location.reload();
+		// 				}
+		// 			});
+		// 		});
+
+		// 		$('#canceleditbtn').on('click', function(){
+		// 			$('#edit-blog-detail').hide();
+		// 			$('#buttons-blog-detail').show();
+		// 		});
+
+		// 		$('#deletebtn').on('click', function(e){
+		// 			e.preventDefault();
+
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[1];
+					
+		// 			$.ajax({
+		// 				type     : 'DELETE',
+		// 				url      : blogentry,
+		// 				crossDomain : true,
+		// 				dataType : 'json',
+		// 				contentType: 'application/json',
+		// 				success  : function(){
+		// 					location.reload();
+		// 				}
+		// 			});
+		// 		});
+
+		// 	function doutputPageContent() {
+		// 		$('#single-blog-detail').html(douthtml);
+		// 		$('#buttons-blog-detail').html(bouthtml);
+		// 	}
+		// });
+				// show the contents of a single blog post
 		$('#singleblog3').on('click', function(e){
 
 				$('#all-blog-titles').hide();
-				var douthtml = '<h2>' + title[2] + '</h2>';
+				$('#single-blog-detail').show();
+				$('#buttons-blog-detail').show();
+
+				var douthtml = '<h2 id="singleblog3-title">' + title[2] + '</h2>';
 				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[2]+'</div>';
 				douthtml = douthtml + '<p>' + text[2] + '</p>';
-				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
-				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn3" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn3" class="btn btn-primary" role="button">Delete This Entry</a></div>';
 				doutputPageContent();
 
-				$('#openeditbtn').on('click', function(e){
+				// hide the single blog post, show all posts
+				$('#singleblog2-title').on('click', function (e) {
+					$('#all-blog-titles').show();
+					$('#single-blog-detail').hide();
+					$('#buttons-blog-detail').hide();
+				});
+
+				// show edit box for single blog post
+				$('#openeditbtn3').on('click', function(e){
 					$('#buttons-blog-detail').hide();
 					$('#edit-blog-detail').show();
 					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[2] + '></textarea></div>';
 					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[2] + '></textarea></div></form></div>';
-					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
-					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn3" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn3" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
 					eoutputPageContent();
 
 					function eoutputPageContent() {
 						$('#edit-blog-detail').html(eouthtml);
 					}
+					
+					//submit edit
+					$('#editbtn3').on('click', function(e){
+						e.preventDefault();
+
+						var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[2];
+						// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+						var formData = {
+							'title' : $('#edit-title-area').val(),
+							'text'  : $('#edit-text-area').val()
+						};
+						
+						$.ajax({
+							type     : 'POST',
+							url      : blogentry,
+							data     : JSON.stringify(formData),
+							crossDomain : true,
+							dataType : 'json',
+							contentType : 'application/json',
+							success  : function(){
+								location.reload();
+							}
+						});
+
+					});
 
 					$('#canceleditbtn').on('click', function(){
 						$('#edit-blog-detail').hide();
 						$('#buttons-blog-detail').show();
 					});
+
 				});
 
-				$('#editbtn').on('click', function(e){
-					e.preventDefault();
-
-					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[2];
-					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
-					var formData = {
-						'title' : $('#edit-title-area').val(),
-						'text'  : $('#edit-text-area').val()
-					};
-					
-					$.ajax({
-						type     : 'POST',
-						url      : blogentry,
-						data     : JSON.stringify(formData),
-						crossDomain : true,
-						dataType : 'json',
-						contentType : 'application/json',
-						success  : function(){
-							location.reload();
-						}
-					});
-				});
-
-				$('#deletebtn').on('click', function(e){
+				$('#deletebtn3').on('click', function(e){
 					e.preventDefault();
 
 					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[2];
@@ -283,68 +397,83 @@
 							location.reload();
 						}
 					});
+
 				});
 
 			function doutputPageContent() {
 				$('#single-blog-detail').html(douthtml);
 				$('#buttons-blog-detail').html(bouthtml);
 			}
+			
+
 		});
 
+				// show the contents of a single blog post
 		$('#singleblog4').on('click', function(e){
 
 				$('#all-blog-titles').hide();
+				$('#single-blog-detail').show();
+				$('#buttons-blog-detail').show();
 
-				var douthtml = '<h2>' + title[3] + '</h2>';
+				var douthtml = '<h2 id="singleblog4-title">' + title[3] + '</h2>';
 				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[3]+'</div>';
 				douthtml = douthtml + '<p>' + text[3] + '</p>';
-				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
-				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn4" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn4" class="btn btn-primary" role="button">Delete This Entry</a></div>';
 				doutputPageContent();
 
-				$('#openeditbtn').on('click', function(e){
+				// hide the single blog post, show all posts
+				$('#singleblog2-title').on('click', function (e) {
+					$('#all-blog-titles').show();
+					$('#single-blog-detail').hide();
+					$('#buttons-blog-detail').hide();
+				});
+
+				// show edit box for single blog post
+				$('#openeditbtn4').on('click', function(e){
 					$('#buttons-blog-detail').hide();
 					$('#edit-blog-detail').show();
 					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[3] + '></textarea></div>';
 					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[3] + '></textarea></div></form></div>';
-					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
-					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn4" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn4" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
 					eoutputPageContent();
 
 					function eoutputPageContent() {
 						$('#edit-blog-detail').html(eouthtml);
 					}
+					
+					//submit edit
+					$('#editbtn4').on('click', function(e){
+						e.preventDefault();
 
-					$('#canceleditbtn').on('click', function(){
+						var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[3];
+						// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+						var formData = {
+							'title' : $('#edit-title-area').val(),
+							'text'  : $('#edit-text-area').val()
+						};
+						
+						$.ajax({
+							type     : 'POST',
+							url      : blogentry,
+							data     : JSON.stringify(formData),
+							crossDomain : true,
+							dataType : 'json',
+							contentType : 'application/json',
+							success  : function(){
+								location.reload();
+							}
+						});
+					});
+
+					$('#canceleditbtn4').on('click', function(){
 						$('#edit-blog-detail').hide();
 						$('#buttons-blog-detail').show();
 					});
 				});
 
-				$('#editbtn').on('click', function(e){
-					e.preventDefault();
-
-					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[3];
-					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
-					var formData = {
-						'title' : $('#edit-title-area').val(),
-						'text'  : $('#edit-text-area').val()
-					};
-					
-					$.ajax({
-						type     : 'POST',
-						url      : blogentry,
-						data     : JSON.stringify(formData),
-						crossDomain : true,
-						dataType : 'json',
-						contentType : 'application/json',
-						success  : function(){
-							location.reload();
-						}
-					});
-				});
-
-				$('#deletebtn').on('click', function(e){
+				$('#deletebtn4').on('click', function(e){
 					e.preventDefault();
 
 					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[3];
@@ -359,6 +488,7 @@
 							location.reload();
 						}
 					});
+
 				});
 
 			function doutputPageContent() {
@@ -367,60 +497,73 @@
 			}
 		});
 
+				// show the contents of a single blog post
 		$('#singleblog5').on('click', function(e){
 
 				$('#all-blog-titles').hide();
+				$('#single-blog-detail').show();
+				$('#buttons-blog-detail').show();
 
-				var douthtml = '<h2>' + title[4] + '</h2>';
+				var douthtml = '<h2 id="singleblog5-title">' + title[4] + '</h2>';
 				douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[4]+'</div>';
 				douthtml = douthtml + '<p>' + text[4] + '</p>';
-				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
-				bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+				var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn5" class="btn btn-primary" role="button">Edit This Entry</a>';
+				bouthtml = bouthtml + '<a href = "#" id = "deletebtn5" class="btn btn-primary" role="button">Delete This Entry</a></div>';
 				doutputPageContent();
 
+				// hide the single blog post, show all posts
+				$('#singleblog5-title').on('click', function (e) {
+					$('#all-blog-titles').show();
+					$('#single-blog-detail').hide();
+					$('#buttons-blog-detail').hide();
+				});
+
+				// show edit box for single blog post
 				$('#openeditbtn').on('click', function(e){
 					$('#buttons-blog-detail').hide();
 					$('#edit-blog-detail').show();
 					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[4] + '></textarea></div>';
 					eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[4] + '></textarea></div></form></div>';
-					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
-					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+					eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn5" class="btn btn-primary" role="button">Confirm Edit</a>';
+					eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn5" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
 					eoutputPageContent();
 
 					function eoutputPageContent() {
 						$('#edit-blog-detail').html(eouthtml);
 					}
+					
+					//submit edit
+					$('#editbtn5').on('click', function(e){
+						e.preventDefault();
 
-					$('#canceleditbtn').on('click', function(){
+						var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[4];
+						// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+						var formData = {
+							'title' : $('#edit-title-area').val(),
+							'text'  : $('#edit-text-area').val()
+						};
+						
+						$.ajax({
+							type     : 'POST',
+							url      : blogentry,
+							data     : JSON.stringify(formData),
+							crossDomain : true,
+							dataType : 'json',
+							contentType : 'application/json',
+							success  : function(){
+								location.reload();
+							}
+						});
+
+					});
+
+					$('#canceleditbtn5').on('click', function(){
 						$('#edit-blog-detail').hide();
 						$('#buttons-blog-detail').show();
 					});
 				});
 
-				$('#editbtn').on('click', function(e){
-					e.preventDefault();
-
-					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[4];
-					// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
-					var formData = {
-						'title' : $('#edit-title-area').val(),
-						'text'  : $('#edit-text-area').val()
-					};
-					
-					$.ajax({
-						type     : 'POST',
-						url      : blogentry,
-						data     : JSON.stringify(formData),
-						crossDomain : true,
-						dataType : 'json',
-						contentType : 'application/json',
-						success  : function(){
-							location.reload();
-						}
-					});
-				});
-
-				$('#deletebtn').on('click', function(e){
+				$('#deletebtn5').on('click', function(e){
 					e.preventDefault();
 
 					var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[4];
@@ -435,6 +578,7 @@
 							location.reload();
 						}
 					});
+
 				});
 
 			function doutputPageContent() {
@@ -442,6 +586,233 @@
 				$('#buttons-blog-detail').html(bouthtml);
 			}
 		});
+
+		// $('#singleblog3').on('click', function(e){
+
+		// 		$('#all-blog-titles').hide();
+		// 		var douthtml = '<h2>' + title[2] + '</h2>';
+		// 		douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[2]+'</div>';
+		// 		douthtml = douthtml + '<p>' + text[2] + '</p>';
+		// 		var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+		// 		bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+		// 		doutputPageContent();
+
+		// 		$('#openeditbtn').on('click', function(e){
+		// 			$('#buttons-blog-detail').hide();
+		// 			$('#edit-blog-detail').show();
+		// 			var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[2] + '></textarea></div>';
+		// 			eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[2] + '></textarea></div></form></div>';
+		// 			eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+		// 			eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+		// 			eoutputPageContent();
+
+		// 			function eoutputPageContent() {
+		// 				$('#edit-blog-detail').html(eouthtml);
+		// 			}
+
+		// 			$('#canceleditbtn').on('click', function(){
+		// 				$('#edit-blog-detail').hide();
+		// 				$('#buttons-blog-detail').show();
+		// 			});
+		// 		});
+
+		// 		$('#editbtn').on('click', function(e){
+		// 			e.preventDefault();
+
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[2];
+		// 			// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+		// 			var formData = {
+		// 				'title' : $('#edit-title-area').val(),
+		// 				'text'  : $('#edit-text-area').val()
+		// 			};
+					
+		// 			$.ajax({
+		// 				type     : 'POST',
+		// 				url      : blogentry,
+		// 				data     : JSON.stringify(formData),
+		// 				crossDomain : true,
+		// 				dataType : 'json',
+		// 				contentType : 'application/json',
+		// 				success  : function(){
+		// 					location.reload();
+		// 				}
+		// 			});
+		// 		});
+
+		// 		$('#deletebtn').on('click', function(e){
+		// 			e.preventDefault();
+
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[2];
+					
+		// 			$.ajax({
+		// 				type     : 'DELETE',
+		// 				url      : blogentry,
+		// 				crossDomain : true,
+		// 				dataType : 'json',
+		// 				contentType: 'application/json',
+		// 				success  : function(){
+		// 					location.reload();
+		// 				}
+		// 			});
+		// 		});
+
+		// 	function doutputPageContent() {
+		// 		$('#single-blog-detail').html(douthtml);
+		// 		$('#buttons-blog-detail').html(bouthtml);
+		// 	}
+		// });
+
+		// $('#singleblog4').on('click', function(e){
+
+		// 		$('#all-blog-titles').hide();
+
+		// 		var douthtml = '<h2>' + title[3] + '</h2>';
+		// 		douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[3]+'</div>';
+		// 		douthtml = douthtml + '<p>' + text[3] + '</p>';
+		// 		var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+		// 		bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+		// 		doutputPageContent();
+
+		// 		$('#openeditbtn').on('click', function(e){
+		// 			$('#buttons-blog-detail').hide();
+		// 			$('#edit-blog-detail').show();
+		// 			var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[3] + '></textarea></div>';
+		// 			eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[3] + '></textarea></div></form></div>';
+		// 			eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+		// 			eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+		// 			eoutputPageContent();
+
+		// 			function eoutputPageContent() {
+		// 				$('#edit-blog-detail').html(eouthtml);
+		// 			}
+
+		// 			$('#canceleditbtn').on('click', function(){
+		// 				$('#edit-blog-detail').hide();
+		// 				$('#buttons-blog-detail').show();
+		// 			});
+		// 		});
+
+		// 		$('#editbtn').on('click', function(e){
+		// 			e.preventDefault();
+
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[3];
+		// 			// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+		// 			var formData = {
+		// 				'title' : $('#edit-title-area').val(),
+		// 				'text'  : $('#edit-text-area').val()
+		// 			};
+					
+		// 			$.ajax({
+		// 				type     : 'POST',
+		// 				url      : blogentry,
+		// 				data     : JSON.stringify(formData),
+		// 				crossDomain : true,
+		// 				dataType : 'json',
+		// 				contentType : 'application/json',
+		// 				success  : function(){
+		// 					location.reload();
+		// 				}
+		// 			});
+		// 		});
+
+		// 		$('#deletebtn').on('click', function(e){
+		// 			e.preventDefault();
+
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[3];
+					
+		// 			$.ajax({
+		// 				type     : 'DELETE',
+		// 				url      : blogentry,
+		// 				crossDomain : true,
+		// 				dataType : 'json',
+		// 				contentType: 'application/json',
+		// 				success  : function(){
+		// 					location.reload();
+		// 				}
+		// 			});
+		// 		});
+
+		// 	function doutputPageContent() {
+		// 		$('#single-blog-detail').html(douthtml);
+		// 		$('#buttons-blog-detail').html(bouthtml);
+		// 	}
+		// });
+
+		// $('#singleblog5').on('click', function(e){
+
+		// 		$('#all-blog-titles').hide();
+
+		// 		var douthtml = '<h2>' + title[4] + '</h2>';
+		// 		douthtml = douthtml + '<div class="bcontent">' + 'Submission Date: ' + time[4]+'</div>';
+		// 		douthtml = douthtml + '<p>' + text[4] + '</p>';
+		// 		var bouthtml = '<div class="container" id=btns-box><a href = "#" id = "openeditbtn" class="btn btn-primary" role="button">Edit This Entry</a>';
+		// 		bouthtml = bouthtml + '<a href = "#" id = "deletebtn" class="btn btn-primary" role="button">Delete This Entry</a></div>';
+		// 		doutputPageContent();
+
+		// 		$('#openeditbtn').on('click', function(e){
+		// 			$('#buttons-blog-detail').hide();
+		// 			$('#edit-blog-detail').show();
+		// 			var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[4] + '></textarea></div>';
+		// 			eouthtml = eouthtml + '<div class="form-group"><textarea class="form-control" id="edit-text-area" name="text" rows="20" placeholder=' + text[4] + '></textarea></div></form></div>';
+		// 			eouthtml = eouthtml + '<div class="container" id=btns-box-final><a href = "#" id = "editbtn" class="btn btn-primary" role="button">Confirm Edit</a>';
+		// 			eouthtml = eouthtml + '<a href = "#" id = "canceleditbtn" class="btn btn-primary" role="button">Cancel Edit</a><p class="counter" id="counter-edit">0</p></div>';
+		// 			eoutputPageContent();
+
+		// 			function eoutputPageContent() {
+		// 				$('#edit-blog-detail').html(eouthtml);
+		// 			}
+
+		// 			$('#canceleditbtn').on('click', function(){
+		// 				$('#edit-blog-detail').hide();
+		// 				$('#buttons-blog-detail').show();
+		// 			});
+		// 		});
+
+		// 		$('#editbtn').on('click', function(e){
+		// 			e.preventDefault();
+
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[4];
+		// 			// var blogentry = 'http://www.Zenonquest.pythonanywhere.com/api/blog/' + bid;
+		// 			var formData = {
+		// 				'title' : $('#edit-title-area').val(),
+		// 				'text'  : $('#edit-text-area').val()
+		// 			};
+					
+		// 			$.ajax({
+		// 				type     : 'POST',
+		// 				url      : blogentry,
+		// 				data     : JSON.stringify(formData),
+		// 				crossDomain : true,
+		// 				dataType : 'json',
+		// 				contentType : 'application/json',
+		// 				success  : function(){
+		// 					location.reload();
+		// 				}
+		// 			});
+		// 		});
+
+		// 		$('#deletebtn').on('click', function(e){
+		// 			e.preventDefault();
+
+		// 			var blogentry = 'https://questblog.herokuapp.com/api/blog/'+ bid[4];
+					
+		// 			$.ajax({
+		// 				type     : 'DELETE',
+		// 				url      : blogentry,
+		// 				crossDomain : true,
+		// 				dataType : 'json',
+		// 				contentType: 'application/json',
+		// 				success  : function(){
+		// 					location.reload();
+		// 				}
+		// 			});
+		// 		});
+
+		// 	function doutputPageContent() {
+		// 		$('#single-blog-detail').html(douthtml);
+		// 		$('#buttons-blog-detail').html(bouthtml);
+		// 	}
+		// });
 	
 });
 </script>
