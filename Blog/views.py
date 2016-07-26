@@ -180,7 +180,8 @@ def before_request():
 #from microblog
 @app.route('/')
 def home():
-    return render_template('public.html', title='Home')
+	return redirect(url_for('index'))
+    # return render_template('public.html', title='Home')
 
 @app.route('/index')
 @login_required
