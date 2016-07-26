@@ -23,7 +23,7 @@
 
 	requestJSON(blogentry, function(json) {
 		var outhtml = '<h2>'+'{{ current_user.username}}&rsquo;s Most Recent Entries'+'</h2>';
-		outhtml = outhtml + '<ul>';
+		// outhtml = outhtml + '<ul>';
 
 		// json.array.length for full array
 		var i = 0;
@@ -39,7 +39,7 @@
 			i++;
 		}
 
-		outhtml = outhtml + '</ul>';
+		// outhtml = outhtml + '</ul>';
 		outputPageContent();
 
 		function outputPageContent() {
@@ -423,7 +423,7 @@
 				doutputPageContent();
 
 				// hide the single blog post, show all posts
-				$('#singleblog2-title').on('click', function (e) {
+				$('#singleblog4-title').on('click', function (e) {
 					$('#all-blog-titles').show();
 					$('#single-blog-detail').hide();
 					$('#buttons-blog-detail').hide();
@@ -519,7 +519,7 @@
 				});
 
 				// show edit box for single blog post
-				$('#openeditbtn').on('click', function(e){
+				$('#openeditbtn5').on('click', function(e){
 					$('#buttons-blog-detail').hide();
 					$('#edit-blog-detail').show();
 					var eouthtml = '<div class="container" id=edit-box><form id="form-edit"><div class="form-group"><textarea class="form-control" id="edit-title-area" name="title" rows="1" placeholder=' + title[4] + '></textarea></div>';
