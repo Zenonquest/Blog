@@ -43,7 +43,7 @@
     </div>
     <div class="collapse navbar-collapse navHeaderCollapse" id="myNavBar">
       <ul class="nav navbar-nav">
-        <li {% if request.path == '/' %} class="active" {% endif %}><a href="{{ url_for('index') }}">Home</a></li>
+        <li {% if request.path == '/' %} class="active" {% endif %}><a {% if g.user.is_authenticated %} href="{{ url_for('index') }}"" {% else %} href="{{ url_for('public')}}" {% endif %}>Home</a></li>
         {% if g.user.is_authenticated %}
         <li {% if request.path == '/create_post' %} class="active" {% endif %}><a href="{{ url_for('create_post') }}">Create</a></li> 
         {% endif %}
