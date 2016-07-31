@@ -6,7 +6,7 @@
         {{ form.hidden_tag() }}
         <h2> Login </h2>
         <div class="control-group">
-            <label class="control-label" for="username">Username (Zenon)</label>
+            <label class="control-label" for="username">Username <span style="color: blue;">(Zenon)</span></label>
             <div class="controls">
                 {{ form.username }}
                 {% for error in form.username.errors %}
@@ -15,7 +15,7 @@
             </div>
         </div>  
         <div class="control-group">
-            <label class="control-label" for="password">Password (zenon)</label>
+            <label class="control-label" for="password">Password <span style="color: blue;">(zenon)</span></label>
             <div class="controls">
                 {{ form.password }}
                 {% for error in form.password.errors %}
